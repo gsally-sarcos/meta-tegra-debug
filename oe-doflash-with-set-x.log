@@ -1,0 +1,855 @@
++ bup_blob=0
++ rcm_boot=0
++ keyfile=
++ sbk_keyfile=
++ user_keyfile=
++ spi_only=
++ external_device=0
++ sdcard=
++ no_flash=0
++ to_sign=0
++ flash_cmd=
++ imgfile=
++ dataimg=
++ inst_args=
++ extdevargs=
++ blocksize=4096
++++ basename ./tegra194-flash-helper.sh
+++ getopt -n tegra194-flash-helper.sh -l bup,no-flash,sign,sdcard,spi-only,boot-only,external-device,rcm-boot,datafile:,usb-instance:,user_key: -o u:v:s:b:B:yc: -- flash.xml.in tegra194-p2888-0008-p2822-0000.dtb tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg 0x9190000 boot.img jetson-min.ext4
++ ARGS=' -- '\''flash.xml.in'\'' '\''tegra194-p2888-0008-p2822-0000.dtb'\'' '\''tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg'\'' '\''0x9190000'\'' '\''boot.img'\'' '\''jetson-min.ext4'\'''
++ '[' 0 -ne 0 ']'
++ eval set -- ' -- '\''flash.xml.in'\'' '\''tegra194-p2888-0008-p2822-0000.dtb'\'' '\''tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg'\'' '\''0x9190000'\'' '\''boot.img'\'' '\''jetson-min.ext4'\'''
+++ set -- -- flash.xml.in tegra194-p2888-0008-p2822-0000.dtb tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg 0x9190000 boot.img jetson-min.ext4
++ unset ARGS
++ true
++ case "$1" in
++ shift
++ break
++ flash_in=flash.xml.in
++ dtb_file=tegra194-p2888-0008-p2822-0000.dtb
++ sdramcfg_files=tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg
++ odmdata=0x9190000
++ kernfile=boot.img
++ imgfile=jetson-min.ext4
++ shift 6
++++ dirname ./tegra194-flash-helper.sh
+++ readlink -f .
++ here=/bld-oe/stevie/jetson-linux-20230330134241
++ flashappname=tegraflash.py
++ '[' '!' -e ./flashvars ']'
++ . ./flashvars
+++ FLASHVARS='BPFDTB_FILE PMIC_CONFIG SCR_COLD_BOOT_CONFIG MISC_COLD_BOOT_CONFIG PINMUX_CONFIG PMC_CONFIG UPHY_CONFIG DEVICE_CONFIG GPIOINT_CONFIG PROD_CONFIG SCR_CONFIG BR_CMD_CONFIG DEV_PARAMS DEV_PARAMS_B MINRATCHET_CONFIG OVERLAY_DTB_FILE'
+++ BPFDTB_FILE=tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb
+++ PMIC_CONFIG=tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg
+++ SCR_COLD_BOOT_CONFIG=tegra194-mb1-bct-scr-cbb-mini.cfg
+++ MISC_COLD_BOOT_CONFIG=tegra194-mb1-bct-misc-l4t-jaxi.cfg
+++ PINMUX_CONFIG=tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg
+++ PMC_CONFIG=tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg
+++ UPHY_CONFIG='--uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg'
+++ DEVICE_CONFIG=tegra19x-mb1-bct-device-qspi-jaxi.cfg
+++ GPIOINT_CONFIG=tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg
+++ PROD_CONFIG=tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg
+++ SCR_CONFIG=tegra194-mb1-bct-scr-cbb-mini.cfg
+++ BR_CMD_CONFIG=tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg
+++ DEV_PARAMS=tegra194-br-bct-qspi-l4t.cfg
+++ DEV_PARAMS_B=tegra194-br-bct_b-qspi-l4t.cfg
+++ MINRATCHET_CONFIG='--minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg'
+++ OVERLAY_DTB_FILE=L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0005-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo
++ '[' -z 'BPFDTB_FILE PMIC_CONFIG SCR_COLD_BOOT_CONFIG MISC_COLD_BOOT_CONFIG PINMUX_CONFIG PMC_CONFIG UPHY_CONFIG DEVICE_CONFIG GPIOINT_CONFIG PROD_CONFIG SCR_CONFIG BR_CMD_CONFIG DEV_PARAMS DEV_PARAMS_B MINRATCHET_CONFIG OVERLAY_DTB_FILE' ']'
+++ mktemp cvm.bin.XXXXX
++ cvm_bin=cvm.bin.RpOKy
++ skipuid=
++ bootauth=
++ BR_CID=
++ '[' -z '' -o -z '' ']'
+++ /bld-oe/stevie/jetson-linux-20230330134241/tegrarcm_v2 --uid
+++ grep BR_CID
+++ cut '-d ' -f2
++ BR_CID=0x880219116405608224000000170180c0
++ chipid=0x880219116405608224000000170180c0
++ '[' -z 0x880219116405608224000000170180c0 ']'
++ '[' 80 '!=' 80 -o 19 '!=' 19 ']'
++ case "${chipid:2:1}" in
++ fuselevel=fuselevel_production
++ bootauth=NS
++ CHIPREV=2
++ skipuid=--skipuid
++ case $bootauth in
++ '[' -n '' -o -n '' ']'
++ have_boardinfo=
++ '[' -z '' -o -z '' ']'
++ keyargs=
++ '[' -z '' ']'
++ '[' -z '' ']'
++ rm -f rcm_state
++ python3 tegraflash.py --chip 0x19 --applet mb1_t194_prod.bin --skipuid --soft_fuses tegra194-mb1-soft-fuses-l4t.cfg --bins 'mb2_applet nvtboot_applet_t194.bin' --cmd 'dump eeprom boardinfo cvm.bin.RpOKy;reboot recovery'
+Welcome to Tegra Flash
+version 1.0.0
+Type ? or help for help and q or quit to exit
+Use ! to execute system commands
+ 
+[   0.0048 ] Generating RCM messages
+[   0.0140 ] tegrahost_v2 --chip 0x19 0 --magicid MB1B --appendsigheader mb1_t194_prod.bin zerosbk
+[   0.0152 ] Header already present for mb1_t194_prod.bin
+[   0.0861 ] tegrasign_v3.py --key None --getmode mode.txt
+[   0.0865 ] Assuming zero filled SBK key
+[   0.0898 ] tegrasign_v3.py --file mb1_t194_prod_sigheader.bin --key None --length 1136 --offset 2960 --pubkeyhash pub_key.key
+[   0.0901 ] Assuming zero filled SBK key
+[   0.2105 ] Warning: pub_key.key is not found
+[   0.1978 ] tegrahost_v2 --chip 0x19 0 --updatesigheader mb1_t194_prod_sigheader.bin mb1_t194_prod_sigheader.hash zerosbk
+[   0.2306 ] tegrabct_v2 --chip 0x19 0 --sfuse tegra194-mb1-soft-fuses-l4t.cfg.pdf sfuse.bin
+[   0.2517 ] tegrarcm_v2 --listrcm rcm_list.xml --chip 0x19 0 --sfuses sfuse.bin --download rcm mb1_t194_prod_sigheader.bin 0 0
+[   0.2523 ] RCM 0 is saved as rcm_0.rcm
+[   0.2554 ] RCM 1 is saved as rcm_1.rcm
+[   0.2555 ] RCM 2 is saved as rcm_2.rcm
+[   0.2555 ] List of rcm files are saved in rcm_list.xml
+[   0.2558 ] Signing RCM messages
+[   0.2724 ] tegrasign_v3.py --key None --list rcm_list.xml --getmontgomeryvalues montgomery.bin --pubkeyhash pub_key.key
+[   0.2725 ] Assuming zero filled SBK key
+[   0.2759 ] Warning: pub_key.key is not found
+[   0.2612 ] Copying signature to RCM mesages
+[   0.2629 ] tegrarcm_v2 --chip 0x19 0 --updatesig rcm_list_signed.xml
+[   0.2856 ] Boot Rom communication
+[   0.2874 ] tegrarcm_v2 --chip 0x19 0 --rcm rcm_list_signed.xml --skipuid
+[   0.2882 ] RCM version 0X190001
+[   0.3191 ] Boot Rom communication completed
+[   2.3459 ] tegrarcm_v2 --isapplet
+[   2.3465 ] Applet version 01.00.0000
+[   2.4236 ] tegrarcm_v2 --ismb2
+[   2.5353 ] tegrahost_v2 --chip 0x19 --align nvtboot_applet_t194_aligned.bin
+[   2.5378 ] tegrahost_v2 --chip 0x19 0 --magicid PLDT --appendsigheader nvtboot_applet_t194_aligned.bin zerosbk
+[   2.5383 ] adding BCH for nvtboot_applet_t194_aligned.bin
+[   2.5572 ] tegrasign_v3.py --key None --list nvtboot_applet_t194_aligned_sigheader.bin_list.xml --pubkeyhash pub_key.key
+[   2.5574 ] Assuming zero filled SBK key
+[   2.5587 ] Warning: pub_key.key is not found
+[   2.5458 ] tegrahost_v2 --chip 0x19 0 --updatesigheader nvtboot_applet_t194_aligned_sigheader.bin.encrypt nvtboot_applet_t194_aligned_sigheader.bin.hash zerosbk
+[   2.5495 ] tegrarcm_v2 --download mb2 nvtboot_applet_t194_sigheader.bin.encrypt
+[   2.5501 ] Applet version 01.00.0000
+[   2.6292 ] Sending mb2
+[   2.6292 ] [................................................] 100%
+[   2.6508 ] tegrarcm_v2 --boot recovery
+[   2.6515 ] Applet version 01.00.0000
+[   3.7412 ] tegrarcm_v2 --isapplet
+[   3.8197 ] tegrarcm_v2 --ismb2
+[   3.8204 ] MB2 Applet version 01.00.0000
+[   3.9116 ] tegrarcm_v2 --ismb2
+[   3.9123 ] MB2 Applet version 01.00.0000
+[   4.0211 ] Retrieving board information
+[   4.0229 ] tegrarcm_v2 --oem platformdetails chip chip_info.bin
+[   4.0235 ] MB2 Applet version 01.00.0000
+[   4.1152 ] Saved platform info in chip_info.bin
+[   4.1195 ] Chip minor revision: 2
+[   4.1195 ] Bootrom revision: 0xf
+[   4.1195 ] Ram code: 0x1
+[   4.1196 ] Chip sku: 0x99
+[   4.1196 ] Chip Sample: non es
+[   4.1206 ] Retrieving EEPROM data
+[   4.1206 ] tegrarcm_v2 --oem platformdetails eeprom cvm /bld-oe/stevie/jetson-linux-20230330134241/cvm.bin.RpOKy
+[   4.1213 ] MB2 Applet version 01.00.0000
+[   4.2047 ] Saved platform info in /bld-oe/stevie/jetson-linux-20230330134241/cvm.bin.RpOKy
+[   4.2474 ] Rebooting to recovery mode
+[   4.2497 ] tegrarcm_v2 --ismb2
+[   4.2504 ] MB2 Applet version 01.00.0000
+[   4.3288 ] Rebooting to recovery mode
+[   4.3306 ] tegrarcm_v2 --reboot recovery
+[   4.3312 ] MB2 Applet version 01.00.0000
++ have_boardinfo=yes
++ skipuid=
++ '[' -n '' ']'
+++ /bld-oe/stevie/jetson-linux-20230330134241/chkbdinfo -i cvm.bin.RpOKy
+++ tr -d '[:space:]'
++ boardid=2888
++ BOARDID=2888
++ '[' -n '' ']'
+++ /bld-oe/stevie/jetson-linux-20230330134241/chkbdinfo -f cvm.bin.RpOKy
+++ tr -d '[:space:]'
+++ tr '[a-z]' '[A-Z]'
++ board_version=600
++ FAB=600
++ '[' -n '' ']'
++ '[' -n yes ']'
+++ /bld-oe/stevie/jetson-linux-20230330134241/chkbdinfo -k cvm.bin.RpOKy
+++ tr -d '[:space:]'
+++ tr '[a-z]' '[A-Z]'
++ board_sku=0008
++ BOARDSKU=0008
++ '[' -n '' ']'
++ '[' -n yes ']'
+++ /bld-oe/stevie/jetson-linux-20230330134241/chkbdinfo -r cvm.bin.RpOKy
+++ tr -d '[:space:]'
+++ tr '[a-z]' '[A-Z]'
++ board_revision=E.0
++ BOARDREV=E.0
++ '[' -z '' -a -n yes ']'
+++ /bld-oe/stevie/jetson-linux-20230330134241/chkbdinfo -a cvm.bin.RpOKy
+++ tr -d '[:space:]'
++ serial_number=1424021093464
++ '[' -f cvm.bin.RpOKy ']'
++ rm -f cvm.bin.RpOKy
++ rm -f boardvars.sh
++ cat
++ '[' -n 1424021093464 ']'
++ echo serial_number=1424021093464
++ '[' -n '' ']'
++ '[' -n 0x880219116405608224000000170180c0 ']'
++ echo 'BR_CID="0x880219116405608224000000170180c0"'
++ TOREV=a01
++ BPFDTBREV=a01
++ PMICREV=a01
++ case "$boardid" in
++ case $board_version in
++ TOREV=a02
++ PMICREV=a02
++ BPFDTBREV=b01
++ '[' 0008 = 0005 ']'
++ ramcodeargs=
++ '[' 2888 = 2888 -a 0008 = 0008 ']'
++ ramcodeargs='--ramcode 1'
++ for var in $FLASHVARS
+++ echo BPFDTB_FILE
++ eval 'pat=$BPFDTB_FILE'
+++ pat=tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb ']'
+++ echo tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb
++ eval 'BPFDTB_FILE=$val'
+++ BPFDTB_FILE=tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb
++ for var in $FLASHVARS
+++ echo PMIC_CONFIG
++ eval 'pat=$PMIC_CONFIG'
+++ pat=tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg ']'
+++ echo tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg
++ eval 'PMIC_CONFIG=$val'
+++ PMIC_CONFIG=tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg
++ for var in $FLASHVARS
+++ echo SCR_COLD_BOOT_CONFIG
++ eval 'pat=$SCR_COLD_BOOT_CONFIG'
+++ pat=tegra194-mb1-bct-scr-cbb-mini.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-mb1-bct-scr-cbb-mini.cfg ']'
+++ echo tegra194-mb1-bct-scr-cbb-mini.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-mb1-bct-scr-cbb-mini.cfg
++ eval 'SCR_COLD_BOOT_CONFIG=$val'
+++ SCR_COLD_BOOT_CONFIG=tegra194-mb1-bct-scr-cbb-mini.cfg
++ for var in $FLASHVARS
+++ echo MISC_COLD_BOOT_CONFIG
++ eval 'pat=$MISC_COLD_BOOT_CONFIG'
+++ pat=tegra194-mb1-bct-misc-l4t-jaxi.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-mb1-bct-misc-l4t-jaxi.cfg ']'
+++ echo tegra194-mb1-bct-misc-l4t-jaxi.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-mb1-bct-misc-l4t-jaxi.cfg
++ eval 'MISC_COLD_BOOT_CONFIG=$val'
+++ MISC_COLD_BOOT_CONFIG=tegra194-mb1-bct-misc-l4t-jaxi.cfg
++ for var in $FLASHVARS
+++ echo PINMUX_CONFIG
++ eval 'pat=$PINMUX_CONFIG'
+++ pat=tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg ']'
+++ echo tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg
++ eval 'PINMUX_CONFIG=$val'
+++ PINMUX_CONFIG=tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg
++ for var in $FLASHVARS
+++ echo PMC_CONFIG
++ eval 'pat=$PMC_CONFIG'
+++ pat=tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg ']'
+++ echo tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg
++ eval 'PMC_CONFIG=$val'
+++ PMC_CONFIG=tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg
++ for var in $FLASHVARS
+++ echo UPHY_CONFIG
++ eval 'pat=$UPHY_CONFIG'
+++ pat='--uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg'
++ '[' -z definedmaybeempty ']'
++ '[' -n '--uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg' ']'
+++ echo --uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val='--uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg'
++ eval 'UPHY_CONFIG=$val'
+++ UPHY_CONFIG='--uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg'
++ for var in $FLASHVARS
+++ echo DEVICE_CONFIG
++ eval 'pat=$DEVICE_CONFIG'
+++ pat=tegra19x-mb1-bct-device-qspi-jaxi.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra19x-mb1-bct-device-qspi-jaxi.cfg ']'
+++ echo tegra19x-mb1-bct-device-qspi-jaxi.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra19x-mb1-bct-device-qspi-jaxi.cfg
++ eval 'DEVICE_CONFIG=$val'
+++ DEVICE_CONFIG=tegra19x-mb1-bct-device-qspi-jaxi.cfg
++ for var in $FLASHVARS
+++ echo GPIOINT_CONFIG
++ eval 'pat=$GPIOINT_CONFIG'
+++ pat=tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg ']'
+++ echo tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg
++ eval 'GPIOINT_CONFIG=$val'
+++ GPIOINT_CONFIG=tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg
++ for var in $FLASHVARS
+++ echo PROD_CONFIG
++ eval 'pat=$PROD_CONFIG'
+++ pat=tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg ']'
+++ echo tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg
++ eval 'PROD_CONFIG=$val'
+++ PROD_CONFIG=tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg
++ for var in $FLASHVARS
+++ echo SCR_CONFIG
++ eval 'pat=$SCR_CONFIG'
+++ pat=tegra194-mb1-bct-scr-cbb-mini.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-mb1-bct-scr-cbb-mini.cfg ']'
+++ echo tegra194-mb1-bct-scr-cbb-mini.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-mb1-bct-scr-cbb-mini.cfg
++ eval 'SCR_CONFIG=$val'
+++ SCR_CONFIG=tegra194-mb1-bct-scr-cbb-mini.cfg
++ for var in $FLASHVARS
+++ echo BR_CMD_CONFIG
++ eval 'pat=$BR_CMD_CONFIG'
+++ pat=tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg ']'
+++ echo tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg
++ eval 'BR_CMD_CONFIG=$val'
+++ BR_CMD_CONFIG=tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg
++ for var in $FLASHVARS
+++ echo DEV_PARAMS
++ eval 'pat=$DEV_PARAMS'
+++ pat=tegra194-br-bct-qspi-l4t.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-br-bct-qspi-l4t.cfg ']'
+++ echo tegra194-br-bct-qspi-l4t.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-br-bct-qspi-l4t.cfg
++ eval 'DEV_PARAMS=$val'
+++ DEV_PARAMS=tegra194-br-bct-qspi-l4t.cfg
++ for var in $FLASHVARS
+++ echo DEV_PARAMS_B
++ eval 'pat=$DEV_PARAMS_B'
+++ pat=tegra194-br-bct_b-qspi-l4t.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-br-bct_b-qspi-l4t.cfg ']'
+++ echo tegra194-br-bct_b-qspi-l4t.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-br-bct_b-qspi-l4t.cfg
++ eval 'DEV_PARAMS_B=$val'
+++ DEV_PARAMS_B=tegra194-br-bct_b-qspi-l4t.cfg
++ for var in $FLASHVARS
+++ echo MINRATCHET_CONFIG
++ eval 'pat=$MINRATCHET_CONFIG'
+++ pat='--minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg'
++ '[' -z definedmaybeempty ']'
++ '[' -n '--minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg' ']'
+++ echo --minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val='--minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg'
++ eval 'MINRATCHET_CONFIG=$val'
+++ MINRATCHET_CONFIG='--minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg'
++ for var in $FLASHVARS
+++ echo OVERLAY_DTB_FILE
++ eval 'pat=$OVERLAY_DTB_FILE'
+++ pat=L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0005-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo
++ '[' -z definedmaybeempty ']'
++ '[' -n L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0005-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo ']'
+++ echo L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0005-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0005-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo
++ eval 'OVERLAY_DTB_FILE=$val'
+++ OVERLAY_DTB_FILE=L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0005-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo
++ '[' -n 2888 ']'
++ '[' -n 600 ']'
++ '[' -n fuselevel_production ']'
++ '[' -n '' ']'
++ BOOTDEV=mmcblk0p1
++ echo 'Board ID(2888) version(600) sku(0008) revision(E.0)'
+Board ID(2888) version(600) sku(0008) revision(E.0)
++ rm -f jetson-agx-xavier-industrial_bootblob_ver.txt
++ echo NV4
++ . bsp_version
+++ BSP_BRANCH=35
+++ BSP_MAJOR=1
+++ BSP_MINOR=0
+++ BSP_VERSION=35.1.0
++ echo '# R35 , REVISION: 1.0'
++ echo 'BOARDID=2888 BOARDSKU=0008 FAB=600'
++ date +%Y%m%d%H%M%S
++ printf '0x%x\n' 2294016
+++ wc -c jetson-agx-xavier-industrial_bootblob_ver.txt
+++ cut '-d ' -f1
++ bytes=85
+++ python3 -c 'import zlib; print("%X" % (zlib.crc32(open("jetson-agx-xavier-industrial_bootblob_ver.txt", "rb").read()) & 0xFFFFFFFF))'
++ cksum=4FBA976E
++ echo 'BYTES:85 CRC32:4FBA976E'
++ '[' -z '' -a 0 -eq 0 ']'
+++ basename jetson-min.ext4
++ appfile=jetson-min.ext4.img
++ '[' -n '' ']'
++ appfile_sed=
++ '[' 0 -ne 0 -o 0 -ne 0 ']'
++ '[' 0 -eq 0 -a -z '' -a 0 -eq 0 ']'
++ appfile_sed='-es,APPFILE_b,jetson-min.ext4.img, -es,APPFILE,jetson-min.ext4.img, -es,DATAFILE,,'
+++ basename tegra194-p2888-0008-p2822-0000.dtb
++ dtb_file_basename=tegra194-p2888-0008-p2822-0000.dtb
++ kernel_dtbfile=kernel_tegra194-p2888-0008-p2822-0000.dtb
++ rm -f kernel_tegra194-p2888-0008-p2822-0000.dtb
++ cp tegra194-p2888-0008-p2822-0000.dtb kernel_tegra194-p2888-0008-p2822-0000.dtb
++ '[' '' = yes -o 0 -eq 1 ']'
++ '[' '' = yes ']'
++ cp flash.xml.in flash.xml.tmp
++ sed -es,VERFILE,jetson-agx-xavier-industrial_bootblob_ver.txt, -es,BPFDTB_FILE,tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb, -es,TBCDTB-FILE,tegra194-p2888-0008-p2822-0000.dtb, '-es, DTB_FILE,kernel_tegra194-p2888-0008-p2822-0000.dtb,' -es,APPFILE_b,jetson-min.ext4.img, -es,APPFILE,jetson-min.ext4.img, -es,DATAFILE,, flash.xml.tmp
++ rm flash.xml.tmp
++ BINSARGS='mb2_bootloader nvtboot_recovery_t194.bin; mts_preboot preboot_c10_prod_cr.bin; mts_mce mce_c10_prod_cr.bin; mts_proper mts_c10_prod_cr.bin; bpmp_fw bpmp-2_t194.bin; bpmp_fw_dtb tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb; spe_fw spe_t194.bin; tos tos-optee_t194.img; eks eks.img; bootloader_dtb tegra194-p2888-0008-p2822-0000.dtb'
++ have_odmsign_func=0
++ '[' '!' -e /bld-oe/stevie/jetson-linux-20230330134241/odmsign.func ']'
++ have_odmsign_func=1
++ '[' -n '' -o -n '' -o -n '' ']'
++ '[' 0 -ne 0 ']'
++ bctargs='--uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg --minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg          --device_config tegra19x-mb1-bct-device-qspi-jaxi.cfg          --misc_config tegra194-mb1-bct-misc-flash.cfg          --misc_cold_boot_config tegra194-mb1-bct-misc-l4t-jaxi.cfg          --pinmux_config tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg          --gpioint_config tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg          --pmic_config tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg          --pmc_config tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg          --prod_config tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg          --scr_config tegra194-mb1-bct-scr-cbb-mini.cfg          --scr_cold_boot_config tegra194-mb1-bct-scr-cbb-mini.cfg          --br_cmd_config tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg          --dev_params tegra194-br-bct-qspi-l4t.cfg,tegra194-br-bct_b-qspi-l4t.cfg          --overlay_dtb L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0005-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo'
++ '[' 0 -ne 0 -o 0 -ne 0 -o '' = yes -o 0 -eq 1 ']'
++ '[' 0 -ne 0 ']'
++ '[' -z '' -a 0 -eq 0 -a 0 -eq 0 -a '' '!=' yes ']'
++ rm -f jetson-min.ext4.img
++ echo 'Creating sparseimage jetson-min.ext4.img...'
+Creating sparseimage jetson-min.ext4.img...
++ /bld-oe/stevie/jetson-linux-20230330134241/mksparse -b 4096 --fillpattern=0 jetson-min.ext4 jetson-min.ext4.img
++ '[' -n '' ']'
++ tfcmd='flash;reboot'
++ temp_user_dir=
++ want_signing=0
++ '[' -n '' ']'
++ '[' 0 -eq 1 ']'
++ '[' 0 -eq 1 -a 0 -eq 1 ']'
++ '[' 1 -eq 1 -a 0 -eq 1 ']'
++ flashcmd='python3 tegraflash.py  --chip 0x19 --bl nvtboot_recovery_cpu_t194.bin 	      --sdram_config tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg 	      --odmdata 0x9190000 	      --bldtb tegra194-p2888-0008-p2822-0000.dtb 	      --applet mb1_t194_prod.bin 	      --soft_fuses tegra194-mb1-soft-fuses-l4t.cfg 	      --cmd "flash;reboot"  	      --cfg flash.xml 	      --boot_chain A 	      --bct_backup 	      --secondary_gpt_backup 	      --uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg --minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg          --device_config tegra19x-mb1-bct-device-qspi-jaxi.cfg          --misc_config tegra194-mb1-bct-misc-flash.cfg          --misc_cold_boot_config tegra194-mb1-bct-misc-l4t-jaxi.cfg          --pinmux_config tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg          --gpioint_config tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg          --pmic_config tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg          --pmc_config tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg          --prod_config tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg          --scr_config tegra194-mb1-bct-scr-cbb-mini.cfg          --scr_cold_boot_config tegra194-mb1-bct-scr-cbb-mini.cfg          --br_cmd_config tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg          --dev_params tegra194-br-bct-qspi-l4t.cfg,tegra194-br-bct_b-qspi-l4t.cfg          --overlay_dtb L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0005-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo --ramcode 1  	      --bins "mb2_bootloader nvtboot_recovery_t194.bin; mts_preboot preboot_c10_prod_cr.bin; mts_mce mce_c10_prod_cr.bin; mts_proper mts_c10_prod_cr.bin; bpmp_fw bpmp-2_t194.bin; bpmp_fw_dtb tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb; spe_fw spe_t194.bin; tos tos-optee_t194.img; eks eks.img; bootloader_dtb tegra194-p2888-0008-p2822-0000.dtb"'
++ '[' 0 -ne 0 ']'
++ '[' 0 -ne 0 ']'
++ '[' 0 -ne 0 ']'
++ eval python3 tegraflash.py --chip 0x19 --bl nvtboot_recovery_cpu_t194.bin --sdram_config tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg --odmdata 0x9190000 --bldtb tegra194-p2888-0008-p2822-0000.dtb --applet mb1_t194_prod.bin --soft_fuses tegra194-mb1-soft-fuses-l4t.cfg --cmd '"flash;reboot"' --cfg flash.xml --boot_chain A --bct_backup --secondary_gpt_backup --uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg --minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg --device_config tegra19x-mb1-bct-device-qspi-jaxi.cfg --misc_config tegra194-mb1-bct-misc-flash.cfg --misc_cold_boot_config tegra194-mb1-bct-misc-l4t-jaxi.cfg --pinmux_config tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg --gpioint_config tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg --pmic_config tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg --pmc_config tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg --prod_config tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg --scr_config tegra194-mb1-bct-scr-cbb-mini.cfg --scr_cold_boot_config tegra194-mb1-bct-scr-cbb-mini.cfg --br_cmd_config tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg --dev_params tegra194-br-bct-qspi-l4t.cfg,tegra194-br-bct_b-qspi-l4t.cfg --overlay_dtb L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0005-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo --ramcode 1 --bins '"mb2_bootloader' 'nvtboot_recovery_t194.bin;' mts_preboot 'preboot_c10_prod_cr.bin;' mts_mce 'mce_c10_prod_cr.bin;' mts_proper 'mts_c10_prod_cr.bin;' bpmp_fw 'bpmp-2_t194.bin;' bpmp_fw_dtb 'tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb;' spe_fw 'spe_t194.bin;' tos 'tos-optee_t194.img;' eks 'eks.img;' bootloader_dtb 'tegra194-p2888-0008-p2822-0000.dtb"'
+++ python3 tegraflash.py --chip 0x19 --bl nvtboot_recovery_cpu_t194.bin --sdram_config tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg --odmdata 0x9190000 --bldtb tegra194-p2888-0008-p2822-0000.dtb --applet mb1_t194_prod.bin --soft_fuses tegra194-mb1-soft-fuses-l4t.cfg --cmd 'flash;reboot' --cfg flash.xml --boot_chain A --bct_backup --secondary_gpt_backup --uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg --minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg --device_config tegra19x-mb1-bct-device-qspi-jaxi.cfg --misc_config tegra194-mb1-bct-misc-flash.cfg --misc_cold_boot_config tegra194-mb1-bct-misc-l4t-jaxi.cfg --pinmux_config tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg --gpioint_config tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg --pmic_config tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg --pmc_config tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg --prod_config tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg --scr_config tegra194-mb1-bct-scr-cbb-mini.cfg --scr_cold_boot_config tegra194-mb1-bct-scr-cbb-mini.cfg --br_cmd_config tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg --dev_params tegra194-br-bct-qspi-l4t.cfg,tegra194-br-bct_b-qspi-l4t.cfg --overlay_dtb L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0005-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo --ramcode 1 --bins 'mb2_bootloader nvtboot_recovery_t194.bin; mts_preboot preboot_c10_prod_cr.bin; mts_mce mce_c10_prod_cr.bin; mts_proper mts_c10_prod_cr.bin; bpmp_fw bpmp-2_t194.bin; bpmp_fw_dtb tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb; spe_fw spe_t194.bin; tos tos-optee_t194.img; eks eks.img; bootloader_dtb tegra194-p2888-0008-p2822-0000.dtb'
+Welcome to Tegra Flash
+version 1.0.0
+Type ? or help for help and q or quit to exit
+Use ! to execute system commands
+ 
+[   0.0967 ] tegrasign_v3.py --key None --getmode mode.txt
+[   0.0971 ] Assuming zero filled SBK key
+[   0.0047 ] Generating RCM messages
+[   0.0079 ] tegrahost_v2 --chip 0x19 0 --magicid MB1B --appendsigheader mb1_t194_prod.bin zerosbk
+[   0.0097 ] Header already present for mb1_t194_prod.bin
+[   0.1280 ] tegrasign_v3.py --key None --getmode mode.txt
+[   0.1283 ] Assuming zero filled SBK key
+[   0.1316 ] tegrasign_v3.py --file mb1_t194_prod_sigheader.bin --key None --length 1136 --offset 2960 --pubkeyhash pub_key.key
+[   0.1319 ] Assuming zero filled SBK key
+[   0.1347 ] Warning: pub_key.key is not found
+[   0.0438 ] tegrahost_v2 --chip 0x19 0 --updatesigheader mb1_t194_prod_sigheader.bin mb1_t194_prod_sigheader.hash zerosbk
+[   0.0507 ] tegrabct_v2 --chip 0x19 0 --sfuse tegra194-mb1-soft-fuses-l4t.cfg sfuse.bin
+[   0.0531 ] tegrabct_v2 --chip 0x19 0 --ratchet_blob ratchet_blob.bin --minratchet tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg
+[   0.0538 ] FwIndex: 1, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 2, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 3, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 4, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 5, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 6, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 7, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 11, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 12, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 13, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 14, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 15, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 16, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 17, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 18, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 19, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 30, MinRatchetLevel: 0
+[   0.0541 ] FwIndex: 31, MinRatchetLevel: 0
+[   0.0541 ] 
+[   0.0558 ] tegrarcm_v2 --listrcm rcm_list.xml --chip 0x19 0 --sfuses sfuse.bin --download rcm mb1_t194_prod_sigheader.bin 0 0
+[   0.0565 ] RCM 0 is saved as rcm_0.rcm
+[   0.0596 ] RCM 1 is saved as rcm_1.rcm
+[   0.0597 ] RCM 2 is saved as rcm_2.rcm
+[   0.0598 ] List of rcm files are saved in rcm_list.xml
+[   0.0599 ] Signing RCM messages
+[   0.1544 ] tegrasign_v3.py --key None --list rcm_list.xml --getmontgomeryvalues montgomery.bin --pubkeyhash pub_key.key
+[   0.1545 ] Assuming zero filled SBK key
+[   0.1578 ] Warning: pub_key.key is not found
+[   0.0651 ] Copying signature to RCM mesages
+[   0.0669 ] tegrarcm_v2 --chip 0x19 0 --updatesig rcm_list_signed.xml
+[   0.0800 ] odmdata (to decode) = 152633344
+[   0.0800 ] Odmdata strings: PCIE_XBAR_4_1_0_1_2,UFS_x1_L1,NVHS_PCIE,enable-debug-console,enable-denver-wdt
+[   0.0800 ] Bpmp odmdata config: {'pcie-xbar-config': [0, 1, 'PCIE_XBAR_4_1_0_1_2'], 'pcie-c0-endpoint-enable': [1, 0, ''], 'pcie-c4-endpoint-enable': [1, 0, ''], 'ufs-config': [0, 1, 'UFS_x1_L1'], 'sata-enable': [1, 0, ''], 'nvhs-owner': [0, 1, 'PCIE'], 'pcie-c5-endpoint-enable': [1, 0, '']}
+[   0.5549 ] Concatenating L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0005-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo to tegra194-p2888-0008-p2822-0000_with_odm_overlay.dtb
+[   0.6712 ] Parsing partition layout
+[   0.6988 ] tegraparser_v2 --pt flash.xml.tmp
+[   0.7663 ] Reading ramcode from backup chip_info.bin file
+[   0.7886 ] RAMCODE Read from Device: 1
+
+[   0.7888 ] Disable BPMP dtb trim, using default dtb
+[   0.7888 ] 
+[   0.7888 ] Creating list of images to be signed
+[   0.7924 ] tegrahost_v2 --chip 0x19 0 --partitionlayout flash.xml.bin --ratchet_blob ratchet_blob.bin --list images_list.xml zerosbk
+[   0.7932 ] MB1: Nvheader already present is mb1_t194_prod_aligned.bin
+[   0.7937 ] Header already present for mb1_t194_prod_aligned_sigheader.bin
+[   0.7939 ] MB1: Nvheader already present is mb1_t194_prod_aligned.bin
+[   0.8114 ] Header already present for mb1_t194_prod_aligned_sigheader.bin
+[   0.8125 ] adding BCH for dram-ecc-t194_aligned.bin
+[   0.8307 ] adding BCH for spe_t194_aligned.bin
+[   0.8704 ] adding BCH for nvtboot_t194_aligned.bin
+[   0.9164 ] Header already present for preboot_c10_prod_cr_aligned.bin
+[   0.9932 ] Header already present for mce_c10_prod_cr_aligned.bin
+[   1.0297 ] adding BCH for mts_c10_prod_cr_aligned.bin
+[   1.2107 ] Header already present for warmboot_t194_prod_aligned.bin
+[   1.3057 ] adding BCH for xusb_sil_rel_fw_aligned
+[   1.3395 ] adding BCH for uefi_jetson_aligned.bin
+[   1.4561 ] adding BCH for tegra194-p2888-0008-p2822-0000_aligned.dtb
+[   1.5049 ] adding BCH for tos-optee_t194_aligned.img
+[   1.5441 ] adding BCH for eks_aligned.img
+[   1.5685 ] adding BCH for adsp-fw_aligned.bin
+[   1.5944 ] adding BCH for camera-rtcpu-t194-rce_aligned.img
+[   1.6218 ] adding BCH for sce_t194_aligned.bin
+[   1.6541 ] adding BCH for bpmp-2_t194_aligned.bin
+[   1.6995 ] adding BCH for tegra194-a02-bpmp-p2888-0008-b01-jaxi_aligned.dtb
+[   1.7250 ] adding BCH for dram-ecc-t194_aligned.bin
+[   1.7278 ] adding BCH for spe_t194_aligned.bin
+[   1.7411 ] adding BCH for nvtboot_t194_aligned.bin
+[   1.7429 ] Header already present for preboot_c10_prod_cr_aligned.bin
+[   1.7701 ] Header already present for mce_c10_prod_cr_aligned.bin
+[   1.7706 ] adding BCH for mts_c10_prod_cr_aligned.bin
+[   1.7848 ] Header already present for warmboot_t194_prod_aligned.bin
+[   1.8763 ] adding BCH for xusb_sil_rel_fw_aligned
+[   1.8770 ] adding BCH for uefi_jetson_aligned.bin
+[   1.9214 ] adding BCH for tegra194-p2888-0008-p2822-0000_aligned.dtb
+[   2.0067 ] adding BCH for tos-optee_t194_aligned.img
+[   2.0211 ] adding BCH for eks_aligned.img
+[   2.0481 ] adding BCH for adsp-fw_aligned.bin
+[   2.0487 ] adding BCH for camera-rtcpu-t194-rce_aligned.img
+[   2.0626 ] adding BCH for sce_t194_aligned.bin
+[   2.0726 ] adding BCH for bpmp-2_t194_aligned.bin
+[   2.0835 ] adding BCH for tegra194-a02-bpmp-p2888-0008-b01-jaxi_aligned.dtb
+[   2.1237 ] Filling MB1 storage info
+[   2.1237 ] Parsing dev params for multi chains
+[   2.1238 ] Generating br-bct
+[   2.1260 ] Performing cfg overlay
+[   2.1260 ] ['tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg', 'tegra194-memcfg-sw-override.cfg']
+[   2.1262 ] sw_memcfg_overlay.pl -c tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg -s tegra194-memcfg-sw-override.cfg -o /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41.cfg
+[   2.1515 ] Updating dev and MSS params in BR BCT
+[   2.1516 ] tegrabct_v2 --dev_param tegra194-br-bct-qspi-l4t.cfg --sdram /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41.cfg --brbct br_bct.cfg --sfuse tegra194-mb1-soft-fuses-l4t.cfg --chip 0x19 0
+[   2.2395 ] Updating bl info
+[   2.2432 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updateblinfo flash.xml.bin
+[   2.2844 ] Generating br-bct
+[   2.2877 ] Performing cfg overlay
+[   2.2877 ] ['/bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41.cfg']
+[   2.2877 ] Updating dev and MSS params in BR BCT
+[   2.2878 ] tegrabct_v2 --dev_param tegra194-br-bct_b-qspi-l4t.cfg --sdram /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41.cfg --brbct br_bct.cfg --sfuse tegra194-mb1-soft-fuses-l4t.cfg --chip 0x19 0
+[   2.3150 ] Updating bl info
+[   2.3168 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updateblinfo flash.xml.bin
+[   2.3286 ] Generating BCT backup image
+[   2.3287 ] dd if=/dev/zero of=bct_backup.img bs=1 count=32768
+[   2.3293 ] 32768+0 records in
+[   2.3721 ] 32768+0 records out
+[   2.3721 ] 32768 bytes (33 kB, 32 KiB) copied, 0.042404 s, 773 kB/s
+[   2.3721 ] 
+[   2.3722 ] Concatenating BCT for chain A to bct_backup.img
+
+[   2.3722 ] dd if=br_bct_BR.bct of=bct_backup.img bs=1 seek=0 conv=notrunc
+[   2.3728 ] 2888+0 records in
+[   2.3763 ] 2888+0 records out
+[   2.3763 ] 2888 bytes (2.9 kB, 2.8 KiB) copied, 0.00319627 s, 904 kB/s
+[   2.3763 ] 
+[   2.3763 ] Concatenating BCT for chain B to bct_backup.img
+
+[   2.3763 ] dd if=br_bct_b_BR.bct of=bct_backup.img bs=1 seek=16384 conv=notrunc
+[   2.3770 ] 2888+0 records in
+[   2.3805 ] 2888+0 records out
+[   2.3805 ] 2888 bytes (2.9 kB, 2.8 KiB) copied, 0.0031456 s, 918 kB/s
+[   2.3805 ] 
+[   2.3805 ] Generating signatures
+[   2.4750 ] tegrasign_v3.py --key None --list images_list.xml --pubkeyhash pub_key.key
+[   2.4751 ] Assuming zero filled SBK key
+[   2.7755 ] Warning: pub_key.key is not found
+[   2.6828 ] Parsing dev params for multi chains
+[   2.6828 ] Generating br-bct
+[   2.6846 ] Performing cfg overlay
+[   2.6846 ] ['/bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41.cfg']
+[   2.6846 ] Updating dev and MSS params in BR BCT
+[   2.6846 ] tegrabct_v2 --dev_param tegra194-br-bct-qspi-l4t.cfg --sdram /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41.cfg --brbct br_bct.cfg --sfuse tegra194-mb1-soft-fuses-l4t.cfg --chip 0x19 0
+[   2.7078 ] Updating bl info
+[   2.7097 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updateblinfo flash.xml.bin --updatesig images_list_signed.xml
+[   2.7162 ] Updating smd info
+[   2.7181 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 --updatesmdinfo flash.xml.bin
+[   2.7226 ] Updating Odmdata
+[   2.7245 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updatefields Odmdata =0x9190000
+[   2.7302 ] Signing BCT
+[   2.7302 ] Get Signed section of bct
+[   2.7320 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --listbct bct_list.xml
+[   2.8274 ] tegrasign_v3.py --key None --list bct_list.xml --getmontgomeryvalues montgomery.bin --pubkeyhash pub_key.key
+[   2.8275 ] Assuming zero filled SBK key
+[   2.8288 ] Warning: pub_key.key is not found
+[   2.7361 ] Updating BCT with signature
+[   2.7380 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updatesig bct_list_signed.xml
+[   2.7768 ] Generating br-bct
+[   2.7790 ] Performing cfg overlay
+[   2.7790 ] ['/bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41.cfg']
+[   2.7790 ] Updating dev and MSS params in BR BCT
+[   2.7791 ] tegrabct_v2 --dev_param tegra194-br-bct_b-qspi-l4t.cfg --sdram /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41.cfg --brbct br_bct.cfg --sfuse tegra194-mb1-soft-fuses-l4t.cfg --chip 0x19 0
+[   2.7899 ] Updating bl info
+[   2.7917 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updateblinfo flash.xml.bin --updatesig images_list_signed.xml
+[   2.8127 ] Updating smd info
+[   2.8148 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 --updatesmdinfo flash.xml.bin
+[   2.8236 ] Updating Odmdata
+[   2.8256 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updatefields Odmdata =0x9190000
+[   2.8334 ] Signing BCT
+[   2.8334 ] Get Signed section of bct
+[   2.8353 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --listbct bct_list.xml
+[   2.9407 ] tegrasign_v3.py --key None --list bct_list.xml --getmontgomeryvalues montgomery.bin --pubkeyhash pub_key.key
+[   2.9409 ] Assuming zero filled SBK key
+[   2.9423 ] Warning: pub_key.key is not found
+[   2.8496 ] Updating BCT with signature
+[   2.8515 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updatesig bct_list_signed.xml
+[   2.8564 ] Generating BCT backup image
+[   2.8564 ] dd if=/dev/zero of=bct_backup.img bs=1 count=32768
+[   2.8571 ] 32768+0 records in
+[   2.9026 ] 32768+0 records out
+[   2.9026 ] 32768 bytes (33 kB, 32 KiB) copied, 0.0449776 s, 729 kB/s
+[   2.9026 ] 
+[   2.9026 ] Concatenating BCT for chain A to bct_backup.img
+
+[   2.9026 ] dd if=br_bct_BR.bct of=bct_backup.img bs=1 seek=0 conv=notrunc
+[   2.9036 ] 2888+0 records in
+[   2.9075 ] 2888+0 records out
+[   2.9075 ] 2888 bytes (2.9 kB, 2.8 KiB) copied, 0.00351719 s, 821 kB/s
+[   2.9075 ] 
+[   2.9075 ] Concatenating BCT for chain B to bct_backup.img
+
+[   2.9076 ] dd if=br_bct_b_BR.bct of=bct_backup.img bs=1 seek=16384 conv=notrunc
+[   2.9084 ] 2888+0 records in
+[   2.9119 ] 2888+0 records out
+[   2.9119 ] 2888 bytes (2.9 kB, 2.8 KiB) copied, 0.00319519 s, 904 kB/s
+[   2.9119 ] 
+[   2.9119 ] Generating coldboot mb1-bct
+[   2.9139 ] tegrabct_v2 --chip 0x19 0 --mb1bct mb1_cold_boot_bct.cfg --sdram /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41.cfg --misc tegra194-mb1-bct-misc-l4t-jaxi.cfg --scr tegra194-mb1-bct-scr-cbb-mini.cfg --pinmux tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg --pmc tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg --pmic tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg --brcommand tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg --prod tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg --gpioint tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg --uphy tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg --device tegra19x-mb1-bct-device-qspi-jaxi.cfg
+[   2.9148 ] MB1-BCT version: 0x1
+
+[   2.9152 ] Parsing config file :tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg 
+[   2.9154 ] Added Platform Config 0 data with size :- 3152
+
+[   2.9410 ] Parsing config file :tegra194-mb1-bct-scr-cbb-mini.cfg 
+[   2.9412 ] Added Platform Config 1 data with size :- 19640
+
+[   3.0031 ] Parsing config file :tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg 
+[   3.0035 ] Added Platform Config 2 data with size :- 24
+
+[   3.0037 ] Parsing config file :tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg 
+[   3.0040 ] Added Platform Config 4 data with size :- 348
+
+[   3.0042 ] Parsing config file :tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg 
+[   3.0045 ] Added Platform Config 3 data with size :- 92
+
+[   3.0047 ] Parsing config file :tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg 
+[   3.0050 ] Added Platform Config 5 data with size :- 68
+
+[   3.0052 ] Parsing config file :tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg 
+[   3.0055 ] Added Platform Config 7 data with size :- 392
+[   3.0091 ] 
+[   3.0091 ] Parsing config file :tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg 
+[   3.0091 ] Added Platform Config 8 data with size :- 12
+[   3.0091 ] 
+[   3.0091 ] Parsing config file :tegra19x-mb1-bct-device-qspi-jaxi.cfg 
+[   3.0091 ] Added Platform Config 9 data with size :- 40
+[   3.0091 ] 
+[   3.0092 ] Updating mb1-bct with firmware information
+[   3.0111 ] tegrabct_v2 --chip 0x19 --mb1bct mb1_cold_boot_bct_MB1.bct --updatefwinfo flash.xml.bin
+[   3.0158 ] Updating mb1-bct with storage information
+[   3.0178 ] tegrabct_v2 --chip 0x19 --mb1bct mb1_cold_boot_bct_MB1.bct --updatestorageinfo flash.xml.bin
+[   3.0338 ] Updating mb1-bct with ratchet information
+[   3.0356 ] tegrabct_v2 --chip 0x19 --mb1bct mb1_cold_boot_bct_MB1.bct --minratchet tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg
+[   3.0364 ] FwIndex: 1, MinRatchetLevel: 0
+[   3.0366 ] FwIndex: 2, MinRatchetLevel: 0
+[   3.0367 ] FwIndex: 3, MinRatchetLevel: 0
+[   3.0368 ] FwIndex: 4, MinRatchetLevel: 0
+[   3.0369 ] FwIndex: 5, MinRatchetLevel: 0
+[   3.0370 ] FwIndex: 6, MinRatchetLevel: 0
+[   3.0371 ] FwIndex: 7, MinRatchetLevel: 0
+[   3.0372 ] FwIndex: 11, MinRatchetLevel: 0
+[   3.0373 ] FwIndex: 12, MinRatchetLevel: 0
+[   3.0374 ] FwIndex: 13, MinRatchetLevel: 0
+[   3.0375 ] FwIndex: 14, MinRatchetLevel: 0
+[   3.0376 ] FwIndex: 15, MinRatchetLevel: 0
+[   3.0377 ] FwIndex: 16, MinRatchetLevel: 0
+[   3.0378 ] FwIndex: 17, MinRatchetLevel: 0
+[   3.0378 ] FwIndex: 18, MinRatchetLevel: 0
+[   3.0379 ] FwIndex: 19, MinRatchetLevel: 0
+[   3.0380 ] FwIndex: 30, MinRatchetLevel: 0
+[   3.0381 ] FwIndex: 31, MinRatchetLevel: 0
+[   3.0521 ] tegrahost_v2 --chip 0x19 --align mb1_cold_boot_bct_MB1_aligned.bct
+[   3.0548 ] tegrahost_v2 --chip 0x19 0 --magicid MBCT --ratchet_blob ratchet_blob.bin --appendsigheader mb1_cold_boot_bct_MB1_aligned.bct zerosbk
+[   3.0555 ] adding BCH for mb1_cold_boot_bct_MB1_aligned.bct
+[   3.1511 ] tegrasign_v3.py --key None --list mb1_cold_boot_bct_MB1_aligned_sigheader.bct_list.xml --pubkeyhash pub_key.key
+[   3.1513 ] Assuming zero filled SBK key
+[   3.1526 ] Warning: pub_key.key is not found
+[   3.0618 ] tegrahost_v2 --chip 0x19 0 --updatesigheader mb1_cold_boot_bct_MB1_aligned_sigheader.bct.encrypt mb1_cold_boot_bct_MB1_aligned_sigheader.bct.hash zerosbk
+[   3.0631 ] Generating recovery mb1-bct
+[   3.0650 ] tegrabct_v2 --chip 0x19 0 --mb1bct mb1_bct.cfg --sdram /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41.cfg --misc tegra194-mb1-bct-misc-flash.cfg --scr tegra194-mb1-bct-scr-cbb-mini.cfg --pinmux tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg --pmc tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg --pmic tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg --brcommand tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg --prod tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg --gpioint tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg --uphy tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg --device tegra19x-mb1-bct-device-qspi-jaxi.cfg
+[   3.0658 ] MB1-BCT version: 0x1
+
+[   3.0661 ] Parsing config file :tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg 
+[   3.0662 ] Added Platform Config 0 data with size :- 3152
+
+[   3.0674 ] Parsing config file :tegra194-mb1-bct-scr-cbb-mini.cfg 
+[   3.0675 ] Added Platform Config 1 data with size :- 19640
+
+[   3.0767 ] Parsing config file :tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg 
+[   3.0768 ] Added Platform Config 2 data with size :- 24
+
+[   3.0769 ] Parsing config file :tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg 
+[   3.0770 ] Added Platform Config 4 data with size :- 348
+
+[   3.0771 ] Parsing config file :tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg 
+[   3.0773 ] Added Platform Config 3 data with size :- 92
+
+[   3.0773 ] Parsing config file :tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg 
+[   3.0775 ] Added Platform Config 5 data with size :- 68
+
+[   3.0775 ] Parsing config file :tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg 
+[   3.0777 ] Added Platform Config 7 data with size :- 392
+
+[   3.0779 ] Parsing config file :tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg 
+[   3.0780 ] Added Platform Config 8 data with size :- 12
+[   3.0780 ] 
+[   3.0780 ] Parsing config file :tegra19x-mb1-bct-device-qspi-jaxi.cfg 
+[   3.0780 ] Added Platform Config 9 data with size :- 40
+[   3.0780 ] 
+[   3.0780 ] Updating mb1-bct with firmware information
+[   3.0799 ] tegrabct_v2 --chip 0x19 --mb1bct mb1_bct_MB1.bct --recov --updatefwinfo flash.xml.bin
+[   3.0822 ] Updating mb1-bct with storage information
+[   3.0840 ] tegrabct_v2 --chip 0x19 --mb1bct mb1_bct_MB1.bct --updatestorageinfo flash.xml.bin
+[   3.0853 ] Updating mb1-bct with ratchet information
+[   3.0872 ] tegrabct_v2 --chip 0x19 --mb1bct mb1_bct_MB1.bct --minratchet tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg
+[   3.0878 ] FwIndex: 1, MinRatchetLevel: 0
+[   3.0902 ] FwIndex: 2, MinRatchetLevel: 0
+[   3.0902 ] FwIndex: 3, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 4, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 5, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 6, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 7, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 11, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 12, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 13, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 14, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 15, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 16, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 17, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 18, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 19, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 30, MinRatchetLevel: 0
+[   3.0904 ] FwIndex: 31, MinRatchetLevel: 0
+[   3.0904 ] 
+[   3.0922 ] tegrahost_v2 --chip 0x19 --align mb1_bct_MB1_aligned.bct
+[   3.0948 ] tegrahost_v2 --chip 0x19 0 --magicid MBCT --ratchet_blob ratchet_blob.bin --appendsigheader mb1_bct_MB1_aligned.bct zerosbk
+[   3.0956 ] adding BCH for mb1_bct_MB1_aligned.bct
+[   3.1910 ] tegrasign_v3.py --key None --list mb1_bct_MB1_aligned_sigheader.bct_list.xml --pubkeyhash pub_key.key
+[   3.1911 ] Assuming zero filled SBK key
+[   3.1925 ] Warning: pub_key.key is not found
+[   3.1017 ] tegrahost_v2 --chip 0x19 0 --updatesigheader mb1_bct_MB1_aligned_sigheader.bct.encrypt mb1_bct_MB1_aligned_sigheader.bct.hash zerosbk
+[   3.1030 ] Generating coldboot mem-bct
+[   3.1048 ] tegrabct_v2 --chip 0x19 0 --sdram /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41.cfg --membct /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41_1.bct /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41_2.bct /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41_3.bct /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41_4.bct
+[   3.1056 ] Packing sdram param for instance[0]
+[   3.1161 ] Packing sdram param for instance[1]
+[   3.1161 ] Packing sdram param for instance[2]
+[   3.1162 ] Packing sdram param for instance[3]
+[   3.1163 ] Packing sdram param for instance[4]
+[   3.1163 ] Packing sdram param for instance[5]
+[   3.1164 ] Packing sdram param for instance[6]
+[   3.1164 ] Packing sdram param for instance[7]
+[   3.1164 ] Packing sdram param for instance[8]
+[   3.1164 ] Packing sdram param for instance[9]
+[   3.1164 ] Packing sdram param for instance[10]
+[   3.1164 ] Packing sdram param for instance[11]
+[   3.1164 ] Packing sdram param for instance[12]
+[   3.1164 ] Packing sdram param for instance[13]
+[   3.1164 ] Packing sdram param for instance[14]
+[   3.1164 ] Packing sdram param for instance[15]
+[   3.1164 ] 
+[   3.1164 ] Getting sector size from pt
+[   3.1182 ] tegraparser_v2 --getsectorsize flash.xml.bin sector_info.bin
+[   3.1190 ] BlockSize read from layout is 200
+
+[   3.1208 ] tegrahost_v2 --chip 0x19 0 --blocksize 512 --magicid MEMB --addsigheader_multi /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41_1.bct /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41_2.bct /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41_3.bct /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41_4.bct
+[   3.1216 ] adding BCH for /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41_1.bct
+[   3.1255 ] tegrahost_v2 --chip 0x19 --align mem_coldboot_aligned.bct
+[   3.1280 ] tegrahost_v2 --chip 0x19 0 --magicid MEMB --ratchet_blob ratchet_blob.bin --appendsigheader mem_coldboot_aligned.bct zerosbk
+[   3.1288 ] Header already present for mem_coldboot_aligned.bct
+[   3.2240 ] tegrasign_v3.py --key None --list mem_coldboot_aligned_sigheader.bct_list.xml --pubkeyhash pub_key.key
+[   3.2241 ] Assuming zero filled SBK key
+[   3.2257 ] Warning: pub_key.key is not found
+[   3.1348 ] tegrahost_v2 --chip 0x19 0 --updatesigheader mem_coldboot_aligned_sigheader.bct.encrypt mem_coldboot_aligned_sigheader.bct.hash zerosbk
+[   3.1360 ] Generating recovery mem-bct
+[   3.1378 ] tegrabct_v2 --chip 0x19 0 --sdram /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41.cfg --membct /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41_1.bct /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41_2.bct /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41_3.bct /bld-oe/stevie/jetson-linux-20230330134241/2365520/tmp52z4rbl41_4.bct
+[   3.1385 ] Packing sdram param for instance[0]
+[   3.1487 ] Packing sdram param for instance[1]
+[   3.1487 ] Packing sdram param for instance[2]
+[   3.1488 ] Packing sdram param for instance[3]
+[   3.1489 ] Packing sdram param for instance[4]
+[   3.1489 ] Packing sdram param for instance[5]
+[   3.1490 ] Packing sdram param for instance[6]
+[   3.1491 ] Packing sdram param for instance[7]
+[   3.1491 ] Packing sdram param for instance[8]
+[   3.1492 ] Packing sdram param for instance[9]
+[   3.1492 ] Packing sdram param for instance[10]
+[   3.1493 ] Packing sdram param for instance[11]
+[   3.1494 ] Packing sdram param for instance[12]
+[   3.1494 ] Packing sdram param for instance[13]
+[   3.1495 ] Packing sdram param for instance[14]
+[   3.1496 ] Packing sdram param for instance[15]
+[   3.1623 ] tegrahost_v2 --chip 0x19 --align mem_rcm_aligned.bct
+[   3.1648 ] tegrahost_v2 --chip 0x19 0 --magicid MEMB --ratchet_blob ratchet_blob.bin --appendsigheader mem_rcm_aligned.bct zerosbk
+[   3.1656 ] adding BCH for mem_rcm_aligned.bct
+[   3.2612 ] tegrasign_v3.py --key None --list mem_rcm_aligned_sigheader.bct_list.xml --pubkeyhash pub_key.key
+[   3.2613 ] Assuming zero filled SBK key
+[   3.2625 ] Warning: pub_key.key is not found
+[   3.1717 ] tegrahost_v2 --chip 0x19 0 --updatesigheader mem_rcm_aligned_sigheader.bct.encrypt mem_rcm_aligned_sigheader.bct.hash zerosbk
+[   3.1942 ] Copying signatures
+[   3.1976 ] tegrahost_v2 --chip 0x19 0 --partitionlayout flash.xml.bin --updatesig images_list_signed.xml
+[   3.7015 ] Boot Rom communication
+[   3.7056 ] tegrarcm_v2 --chip 0x19 0 --rcm rcm_list_signed.xml
+[   3.7066 ] BR_CID: 0x880219116405608224000000170180c0
+[   3.7326 ] RCM version 0X190001
+[   3.7769 ] Boot Rom communication completed
+[   5.8080 ] tegrarcm_v2 --isapplet
+[   5.8101 ] Applet version 01.00.0000
+[   5.8881 ] Sending BCTs
+[   5.8904 ] tegrarcm_v2 --download bct_bootrom br_bct_BR.bct --download bct_mb1 mb1_bct_MB1_sigheader.bct.encrypt --download bct_mem mem_rcm_sigheader.bct.encrypt
+[   5.8911 ] Applet version 01.00.0000
+[   5.9907 ] Sending bct_bootrom
+[   5.9908 ] [................................................] 100%
+[   5.9922 ] Sending bct_mb1
+[   5.9973 ] [................................................] 100%
+[   6.0018 ] Sending bct_mem
+[   6.0510 ] [................................................] 100%
+Error: Return value 8
+Command tegrarcm_v2 --download bct_bootrom br_bct_BR.bct --download bct_mb1 mb1_bct_MB1_sigheader.bct.encrypt --download bct_mem mem_rcm_sigheader.bct.encrypt
++ exit 1
