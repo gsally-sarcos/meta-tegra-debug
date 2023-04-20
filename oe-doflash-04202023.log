@@ -1,0 +1,1208 @@
++ bup_blob=0
++ rcm_boot=0
++ keyfile=
++ sbk_keyfile=
++ user_keyfile=
++ spi_only=
++ external_device=0
++ sdcard=
++ no_flash=0
++ to_sign=0
++ flash_cmd=
++ imgfile=
++ dataimg=
++ inst_args=
++ extdevargs=
++ blocksize=4096
++++ basename ./tegra194-flash-helper.sh
+++ getopt -n tegra194-flash-helper.sh -l bup,no-flash,sign,sdcard,spi-only,boot-only,external-device,rcm-boot,datafile:,usb-instance:,user_key: -o u:v:s:b:B:yc: -- flash.xml.in tegra194-p2888-0008-p2822-0000.dtb tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg 0x9190000 boot.img jetson-min.ext4
++ ARGS=' -- '\''flash.xml.in'\'' '\''tegra194-p2888-0008-p2822-0000.dtb'\'' '\''tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg'\'' '\''0x9190000'\'' '\''boot.img'\'' '\''jetson-min.ext4'\'''
++ '[' 0 -ne 0 ']'
++ eval set -- ' -- '\''flash.xml.in'\'' '\''tegra194-p2888-0008-p2822-0000.dtb'\'' '\''tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg'\'' '\''0x9190000'\'' '\''boot.img'\'' '\''jetson-min.ext4'\'''
+++ set -- -- flash.xml.in tegra194-p2888-0008-p2822-0000.dtb tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg 0x9190000 boot.img jetson-min.ext4
++ unset ARGS
++ true
++ case "$1" in
++ shift
++ break
++ flash_in=flash.xml.in
++ dtb_file=tegra194-p2888-0008-p2822-0000.dtb
++ sdramcfg_files=tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg
++ odmdata=0x9190000
++ kernfile=boot.img
++ imgfile=jetson-min.ext4
++ shift 6
++++ dirname ./tegra194-flash-helper.sh
+++ readlink -f .
++ here=/home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817
++ flashappname=tegraflash.py
++ '[' '!' -e ./flashvars ']'
++ . ./flashvars
+++ FLASHVARS='BPFDTB_FILE PMIC_CONFIG SCR_COLD_BOOT_CONFIG MISC_COLD_BOOT_CONFIG PINMUX_CONFIG PMC_CONFIG UPHY_CONFIG DEVICE_CONFIG GPIOINT_CONFIG PROD_CONFIG SCR_CONFIG BR_CMD_CONFIG DEV_PARAMS DEV_PARAMS_B MINRATCHET_CONFIG OVERLAY_DTB_FILE'
+++ BPFDTB_FILE=tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb
+++ PMIC_CONFIG=tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg
+++ SCR_COLD_BOOT_CONFIG=tegra194-mb1-bct-scr-cbb-mini.cfg
+++ MISC_COLD_BOOT_CONFIG=tegra194-mb1-bct-misc-l4t-jaxi.cfg
+++ PINMUX_CONFIG=tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg
+++ PMC_CONFIG=tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg
+++ UPHY_CONFIG='--uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg'
+++ DEVICE_CONFIG=tegra19x-mb1-bct-device-qspi-jaxi.cfg
+++ GPIOINT_CONFIG=tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg
+++ PROD_CONFIG=tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg
+++ SCR_CONFIG=tegra194-mb1-bct-scr-cbb-mini.cfg
+++ BR_CMD_CONFIG=tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg
+++ DEV_PARAMS=tegra194-br-bct-qspi-l4t.cfg
+++ DEV_PARAMS_B=tegra194-br-bct_b-qspi-l4t.cfg
+++ MINRATCHET_CONFIG='--minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg'
+++ OVERLAY_DTB_FILE=L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo
++ '[' -z 'BPFDTB_FILE PMIC_CONFIG SCR_COLD_BOOT_CONFIG MISC_COLD_BOOT_CONFIG PINMUX_CONFIG PMC_CONFIG UPHY_CONFIG DEVICE_CONFIG GPIOINT_CONFIG PROD_CONFIG SCR_CONFIG BR_CMD_CONFIG DEV_PARAMS DEV_PARAMS_B MINRATCHET_CONFIG OVERLAY_DTB_FILE' ']'
+++ mktemp cvm.bin.XXXXX
++ cvm_bin=cvm.bin.lbn6h
++ skipuid=
++ bootauth=
++ BR_CID=
++ '[' -z '' -o -z '' ']'
+++ /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/tegrarcm_v2 --uid
+++ grep BR_CID
+++ cut '-d ' -f2
++ BR_CID=0x880219116405608224000000170180c0
++ chipid=0x880219116405608224000000170180c0
++ '[' -z 0x880219116405608224000000170180c0 ']'
++ '[' 80 '!=' 80 -o 19 '!=' 19 ']'
++ case "${chipid:2:1}" in
++ fuselevel=fuselevel_production
++ bootauth=NS
++ CHIPREV=2
++ skipuid=--skipuid
++ case $bootauth in
++ '[' -n '' -o -n '' ']'
++ have_boardinfo=
++ '[' -z '' -o -z '' ']'
++ keyargs=
++ '[' -z '' ']'
++ '[' -z '' ']'
++ rm -f rcm_state
++ python3 tegraflash.py --chip 0x19 --applet mb1_t194_prod.bin --skipuid --soft_fuses tegra194-mb1-soft-fuses-l4t.cfg --bins 'mb2_applet nvtboot_applet_t194.bin' --cmd 'dump eeprom boardinfo cvm.bin.lbn6h;reboot recovery'
+Welcome to Tegra Flash
+version 1.0.0
+Type ? or help for help and q or quit to exit
+Use ! to execute system commands
+ 
+[   0.0036 ] Generating RCM messages
+[   0.0053 ] tegrahost_v2 --chip 0x19 0 --magicid MB1B --appendsigheader mb1_t194_prod.bin zerosbk
+[   0.0059 ] Header already present for mb1_t194_prod.bin
+[   0.0102 ] tegrasign_v3.py --key None --getmode mode.txt
+[   0.0103 ] Assuming zero filled SBK key
+[   0.0122 ] tegrasign_v3.py --file mb1_t194_prod_sigheader.bin --key None --length 1136 --offset 2960 --pubkeyhash pub_key.key
+[   0.0123 ] Assuming zero filled SBK key
+[   0.0138 ] Warning: pub_key.key is not found
+[   0.0150 ] tegrahost_v2 --chip 0x19 0 --updatesigheader mb1_t194_prod_sigheader.bin mb1_t194_prod_sigheader.hash zerosbk
+[   0.0196 ] tegrabct_v2 --chip 0x19 0 --sfuse tegra194-mb1-soft-fuses-l4t.cfg.pdf sfuse.bin
+[   0.0221 ] tegrarcm_v2 --listrcm rcm_list.xml --chip 0x19 0 --sfuses sfuse.bin --download rcm mb1_t194_prod_sigheader.bin 0 0
+[   0.0227 ] RCM 0 is saved as rcm_0.rcm
+[   0.0250 ] RCM 1 is saved as rcm_1.rcm
+[   0.0250 ] RCM 2 is saved as rcm_2.rcm
+[   0.0250 ] List of rcm files are saved in rcm_list.xml
+[   0.0250 ] 
+[   0.0250 ] Signing RCM messages
+[   0.0274 ] tegrasign_v3.py --key None --list rcm_list.xml --getmontgomeryvalues montgomery.bin --pubkeyhash pub_key.key
+[   0.0275 ] Assuming zero filled SBK key
+[   0.0310 ] Warning: pub_key.key is not found
+[   0.0305 ] Copying signature to RCM mesages
+[   0.0322 ] tegrarcm_v2 --chip 0x19 0 --updatesig rcm_list_signed.xml
+[   0.0333 ] Boot Rom communication
+[   0.0350 ] tegrarcm_v2 --chip 0x19 0 --rcm rcm_list_signed.xml --skipuid
+[   0.0357 ] RCM version 0X190001
+[   0.0630 ] Boot Rom communication completed
+[   2.0931 ] tegrarcm_v2 --isapplet
+[   2.0952 ] Applet version 01.00.0000
+[   2.1719 ] tegrarcm_v2 --ismb2
+[   2.2819 ] tegrahost_v2 --chip 0x19 --align nvtboot_applet_t194_aligned.bin
+[   2.2843 ] tegrahost_v2 --chip 0x19 0 --magicid PLDT --appendsigheader nvtboot_applet_t194_aligned.bin zerosbk
+[   2.2848 ] adding BCH for nvtboot_applet_t194_aligned.bin
+[   2.2962 ] tegrasign_v3.py --key None --list nvtboot_applet_t194_aligned_sigheader.bin_list.xml --pubkeyhash pub_key.key
+[   2.2963 ] Assuming zero filled SBK key
+[   2.2977 ] Warning: pub_key.key is not found
+[   2.2990 ] tegrahost_v2 --chip 0x19 0 --updatesigheader nvtboot_applet_t194_aligned_sigheader.bin.encrypt nvtboot_applet_t194_aligned_sigheader.bin.hash zerosbk
+[   2.3027 ] tegrarcm_v2 --download mb2 nvtboot_applet_t194_sigheader.bin.encrypt
+[   2.3033 ] Applet version 01.00.0000
+[   2.3812 ] Sending mb2
+[   2.3813 ] [................................................] 100%
+[   2.4035 ] tegrarcm_v2 --boot recovery
+[   2.4041 ] Applet version 01.00.0000
+[   3.4940 ] tegrarcm_v2 --isapplet
+[   3.5810 ] tegrarcm_v2 --ismb2
+[   3.5824 ] MB2 Applet version 01.00.0000
+[   3.6785 ] tegrarcm_v2 --ismb2
+[   3.6792 ] MB2 Applet version 01.00.0000
+[   3.7752 ] Retrieving board information
+[   3.7770 ] tegrarcm_v2 --oem platformdetails chip chip_info.bin
+[   3.7776 ] MB2 Applet version 01.00.0000
+[   3.8761 ] Saved platform info in chip_info.bin
+[   3.8808 ] Chip minor revision: 2
+[   3.8808 ] Bootrom revision: 0xf
+[   3.8809 ] Ram code: 0x1
+[   3.8810 ] Chip sku: 0x99
+[   3.8810 ] Chip Sample: non es
+[   3.8820 ] Retrieving EEPROM data
+[   3.8820 ] tegrarcm_v2 --oem platformdetails eeprom cvm /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/cvm.bin.lbn6h
+[   3.8827 ] MB2 Applet version 01.00.0000
+[   3.9647 ] Saved platform info in /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/cvm.bin.lbn6h
+[   4.0059 ] Rebooting to recovery mode
+[   4.0096 ] tegrarcm_v2 --ismb2
+[   4.0114 ] MB2 Applet version 01.00.0000
+[   4.0856 ] Rebooting to recovery mode
+[   4.0877 ] tegrarcm_v2 --reboot recovery
+[   4.0883 ] MB2 Applet version 01.00.0000
++ have_boardinfo=yes
++ skipuid=
++ '[' -n '' ']'
+++ /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/chkbdinfo -i cvm.bin.lbn6h
+++ tr -d '[:space:]'
++ boardid=2888
++ BOARDID=2888
++ '[' -n '' ']'
+++ /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/chkbdinfo -f cvm.bin.lbn6h
+++ tr -d '[:space:]'
+++ tr '[a-z]' '[A-Z]'
++ board_version=600
++ FAB=600
++ '[' -n '' ']'
++ '[' -n yes ']'
+++ /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/chkbdinfo -k cvm.bin.lbn6h
+++ tr -d '[:space:]'
+++ tr '[a-z]' '[A-Z]'
++ board_sku=0008
++ BOARDSKU=0008
++ '[' -n '' ']'
++ '[' -n yes ']'
+++ /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/chkbdinfo -r cvm.bin.lbn6h
+++ tr -d '[:space:]'
+++ tr '[a-z]' '[A-Z]'
++ board_revision=E.0
++ BOARDREV=E.0
++ '[' -z '' -a -n yes ']'
+++ /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/chkbdinfo -a cvm.bin.lbn6h
+++ tr -d '[:space:]'
++ serial_number=1424021093464
++ '[' -f cvm.bin.lbn6h ']'
++ rm -f cvm.bin.lbn6h
++ rm -f boardvars.sh
++ cat
++ '[' -n 1424021093464 ']'
++ echo serial_number=1424021093464
++ '[' -n '' ']'
++ '[' -n 0x880219116405608224000000170180c0 ']'
++ echo 'BR_CID="0x880219116405608224000000170180c0"'
++ TOREV=a01
++ BPFDTBREV=a01
++ PMICREV=a01
++ case "$boardid" in
++ case $board_version in
++ TOREV=a02
++ PMICREV=a02
++ BPFDTBREV=b01
++ '[' 0008 = 0005 ']'
++ ramcodeargs=
++ misc_cfg=tegra194-mb1-bct-misc-flash.cfg
++ '[' 2888 = 2888 -a 0008 = 0008 ']'
++ ramcodeargs='--ramcode 1'
++ misc_cfg=tegra194-mb1-bct-misc-flash-jaxi.cfg
++ for var in $FLASHVARS
+++ echo BPFDTB_FILE
++ eval 'pat=$BPFDTB_FILE'
+++ pat=tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb ']'
+++ echo tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb
++ eval 'BPFDTB_FILE=$val'
+++ BPFDTB_FILE=tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb
++ for var in $FLASHVARS
+++ echo PMIC_CONFIG
++ eval 'pat=$PMIC_CONFIG'
+++ pat=tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg ']'
+++ echo tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg
++ eval 'PMIC_CONFIG=$val'
+++ PMIC_CONFIG=tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg
++ for var in $FLASHVARS
+++ echo SCR_COLD_BOOT_CONFIG
++ eval 'pat=$SCR_COLD_BOOT_CONFIG'
+++ pat=tegra194-mb1-bct-scr-cbb-mini.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-mb1-bct-scr-cbb-mini.cfg ']'
+++ echo tegra194-mb1-bct-scr-cbb-mini.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-mb1-bct-scr-cbb-mini.cfg
++ eval 'SCR_COLD_BOOT_CONFIG=$val'
+++ SCR_COLD_BOOT_CONFIG=tegra194-mb1-bct-scr-cbb-mini.cfg
++ for var in $FLASHVARS
+++ echo MISC_COLD_BOOT_CONFIG
++ eval 'pat=$MISC_COLD_BOOT_CONFIG'
+++ pat=tegra194-mb1-bct-misc-l4t-jaxi.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-mb1-bct-misc-l4t-jaxi.cfg ']'
+++ echo tegra194-mb1-bct-misc-l4t-jaxi.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-mb1-bct-misc-l4t-jaxi.cfg
++ eval 'MISC_COLD_BOOT_CONFIG=$val'
+++ MISC_COLD_BOOT_CONFIG=tegra194-mb1-bct-misc-l4t-jaxi.cfg
++ for var in $FLASHVARS
+++ echo PINMUX_CONFIG
++ eval 'pat=$PINMUX_CONFIG'
+++ pat=tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg ']'
+++ echo tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg
++ eval 'PINMUX_CONFIG=$val'
+++ PINMUX_CONFIG=tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg
++ for var in $FLASHVARS
+++ echo PMC_CONFIG
++ eval 'pat=$PMC_CONFIG'
+++ pat=tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg ']'
+++ echo tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg
++ eval 'PMC_CONFIG=$val'
+++ PMC_CONFIG=tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg
++ for var in $FLASHVARS
+++ echo UPHY_CONFIG
++ eval 'pat=$UPHY_CONFIG'
+++ pat='--uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg'
++ '[' -z definedmaybeempty ']'
++ '[' -n '--uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg' ']'
+++ echo --uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val='--uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg'
++ eval 'UPHY_CONFIG=$val'
+++ UPHY_CONFIG='--uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg'
++ for var in $FLASHVARS
+++ echo DEVICE_CONFIG
++ eval 'pat=$DEVICE_CONFIG'
+++ pat=tegra19x-mb1-bct-device-qspi-jaxi.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra19x-mb1-bct-device-qspi-jaxi.cfg ']'
+++ echo tegra19x-mb1-bct-device-qspi-jaxi.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra19x-mb1-bct-device-qspi-jaxi.cfg
++ eval 'DEVICE_CONFIG=$val'
+++ DEVICE_CONFIG=tegra19x-mb1-bct-device-qspi-jaxi.cfg
++ for var in $FLASHVARS
+++ echo GPIOINT_CONFIG
++ eval 'pat=$GPIOINT_CONFIG'
+++ pat=tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg ']'
+++ echo tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg
++ eval 'GPIOINT_CONFIG=$val'
+++ GPIOINT_CONFIG=tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg
++ for var in $FLASHVARS
+++ echo PROD_CONFIG
++ eval 'pat=$PROD_CONFIG'
+++ pat=tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg ']'
+++ echo tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg
++ eval 'PROD_CONFIG=$val'
+++ PROD_CONFIG=tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg
++ for var in $FLASHVARS
+++ echo SCR_CONFIG
++ eval 'pat=$SCR_CONFIG'
+++ pat=tegra194-mb1-bct-scr-cbb-mini.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-mb1-bct-scr-cbb-mini.cfg ']'
+++ echo tegra194-mb1-bct-scr-cbb-mini.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-mb1-bct-scr-cbb-mini.cfg
++ eval 'SCR_CONFIG=$val'
+++ SCR_CONFIG=tegra194-mb1-bct-scr-cbb-mini.cfg
++ for var in $FLASHVARS
+++ echo BR_CMD_CONFIG
++ eval 'pat=$BR_CMD_CONFIG'
+++ pat=tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg ']'
+++ echo tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg
++ eval 'BR_CMD_CONFIG=$val'
+++ BR_CMD_CONFIG=tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg
++ for var in $FLASHVARS
+++ echo DEV_PARAMS
++ eval 'pat=$DEV_PARAMS'
+++ pat=tegra194-br-bct-qspi-l4t.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-br-bct-qspi-l4t.cfg ']'
+++ echo tegra194-br-bct-qspi-l4t.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-br-bct-qspi-l4t.cfg
++ eval 'DEV_PARAMS=$val'
+++ DEV_PARAMS=tegra194-br-bct-qspi-l4t.cfg
++ for var in $FLASHVARS
+++ echo DEV_PARAMS_B
++ eval 'pat=$DEV_PARAMS_B'
+++ pat=tegra194-br-bct_b-qspi-l4t.cfg
++ '[' -z definedmaybeempty ']'
++ '[' -n tegra194-br-bct_b-qspi-l4t.cfg ']'
+++ echo tegra194-br-bct_b-qspi-l4t.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=tegra194-br-bct_b-qspi-l4t.cfg
++ eval 'DEV_PARAMS_B=$val'
+++ DEV_PARAMS_B=tegra194-br-bct_b-qspi-l4t.cfg
++ for var in $FLASHVARS
+++ echo MINRATCHET_CONFIG
++ eval 'pat=$MINRATCHET_CONFIG'
+++ pat='--minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg'
++ '[' -z definedmaybeempty ']'
++ '[' -n '--minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg' ']'
+++ echo --minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val='--minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg'
++ eval 'MINRATCHET_CONFIG=$val'
+++ MINRATCHET_CONFIG='--minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg'
++ for var in $FLASHVARS
+++ echo OVERLAY_DTB_FILE
++ eval 'pat=$OVERLAY_DTB_FILE'
+++ pat=L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo
++ '[' -z definedmaybeempty ']'
++ '[' -n L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo ']'
+++ echo L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo
+++ sed -es,@BPFDTBREV@,b01, -es,@BOARDREV@,a02, -es,@PMICREV@,a02, -es,@CHIPREV@,2,
++ val=L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo
++ eval 'OVERLAY_DTB_FILE=$val'
+++ OVERLAY_DTB_FILE=L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo
++ '[' -n 2888 ']'
++ '[' -n 600 ']'
++ '[' -n fuselevel_production ']'
++ '[' -n '' ']'
++ BOOTDEV=mmcblk0p1
++ echo 'Board ID(2888) version(600) sku(0008) revision(E.0)'
+Board ID(2888) version(600) sku(0008) revision(E.0)
++ rm -f jetson-agx-xavier-industrial_bootblob_ver.txt
++ echo NV4
++ . bsp_version
+++ BSP_BRANCH=35
+++ BSP_MAJOR=1
+++ BSP_MINOR=0
+++ BSP_VERSION=35.1.0
++ echo '# R35 , REVISION: 1.0'
++ echo 'BOARDID=2888 BOARDSKU=0008 FAB=600'
++ date +%Y%m%d%H%M%S
++ printf '0x%x\n' 2294016
+++ wc -c jetson-agx-xavier-industrial_bootblob_ver.txt
+++ cut '-d ' -f1
++ bytes=85
+++ python3 -c 'import zlib; print("%X" % (zlib.crc32(open("jetson-agx-xavier-industrial_bootblob_ver.txt", "rb").read()) & 0xFFFFFFFF))'
++ cksum=9F7DEC64
++ echo 'BYTES:85 CRC32:9F7DEC64'
++ '[' -z '' -a 0 -eq 0 ']'
+++ basename jetson-min.ext4
++ appfile=jetson-min.ext4.img
++ '[' -n '' ']'
++ appfile_sed=
++ '[' 0 -ne 0 -o 0 -ne 0 ']'
++ '[' 0 -eq 0 -a -z '' -a 0 -eq 0 ']'
++ appfile_sed='-es,APPFILE_b,jetson-min.ext4.img, -es,APPFILE,jetson-min.ext4.img, -es,DATAFILE,,'
+++ basename tegra194-p2888-0008-p2822-0000.dtb
++ dtb_file_basename=tegra194-p2888-0008-p2822-0000.dtb
++ kernel_dtbfile=kernel_tegra194-p2888-0008-p2822-0000.dtb
++ rm -f kernel_tegra194-p2888-0008-p2822-0000.dtb
++ cp tegra194-p2888-0008-p2822-0000.dtb kernel_tegra194-p2888-0008-p2822-0000.dtb
++ '[' '' = yes -o 0 -eq 1 ']'
++ '[' '' = yes ']'
++ cp flash.xml.in flash.xml.tmp
+++ basename tegra194-a02-bpmp-p2888-0008-b01-jaxi.dtb .dtb
++ bpfdtbfile_compressed=tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4.dtb
++ '[' '!' -e tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4.dtb ']'
++ BPFDTB_FILE=tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4.dtb
++ sed -es,VERFILE,jetson-agx-xavier-industrial_bootblob_ver.txt, -es,BPFDTB_FILE,tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4.dtb, -es,TBCDTB-FILE,tegra194-p2888-0008-p2822-0000.dtb, '-es, DTB_FILE,kernel_tegra194-p2888-0008-p2822-0000.dtb,' -es,APPFILE_b,jetson-min.ext4.img, -es,APPFILE,jetson-min.ext4.img, -es,DATAFILE,, flash.xml.tmp
++ rm flash.xml.tmp
++ BINSARGS='mb2_bootloader nvtboot_recovery_t194.bin; mts_preboot preboot_c10_prod_cr.bin; mts_mce mce_c10_prod_cr.bin; mts_proper mts_c10_prod_cr.bin; bpmp_fw bpmp-2_t194.bin; bpmp_fw_dtb tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4.dtb; spe_fw spe_t194.bin; tos tos-optee_t194.img; eks eks.img; bootloader_dtb tegra194-p2888-0008-p2822-0000.dtb'
++ have_odmsign_func=0
++ '[' '!' -e /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/odmsign.func ']'
++ have_odmsign_func=1
++ '[' -n '' -o -n '' -o -n '' ']'
++ '[' 0 -ne 0 ']'
++ bctargs='--uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg --minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg          --device_config tegra19x-mb1-bct-device-qspi-jaxi.cfg          --misc_config tegra194-mb1-bct-misc-flash-jaxi.cfg          --misc_cold_boot_config tegra194-mb1-bct-misc-l4t-jaxi.cfg          --pinmux_config tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg          --gpioint_config tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg          --pmic_config tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg          --pmc_config tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg          --prod_config tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg          --scr_config tegra194-mb1-bct-scr-cbb-mini.cfg          --scr_cold_boot_config tegra194-mb1-bct-scr-cbb-mini.cfg          --br_cmd_config tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg          --dev_params tegra194-br-bct-qspi-l4t.cfg,tegra194-br-bct_b-qspi-l4t.cfg          --overlay_dtb L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo'
++ '[' 0 -ne 0 -o 0 -ne 0 -o '' = yes -o 0 -eq 1 ']'
++ '[' 0 -ne 0 ']'
++ '[' -z '' -a 0 -eq 0 -a 0 -eq 0 -a '' '!=' yes ']'
++ rm -f jetson-min.ext4.img
++ echo 'Creating sparseimage jetson-min.ext4.img...'
+Creating sparseimage jetson-min.ext4.img...
++ /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/mksparse -b 4096 --fillpattern=0 jetson-min.ext4 jetson-min.ext4.img
++ '[' -n '' ']'
++ tfcmd='flash;reboot'
++ temp_user_dir=
++ want_signing=0
++ '[' -n '' ']'
++ '[' 0 -eq 1 ']'
++ '[' 0 -eq 1 -a 0 -eq 1 ']'
++ '[' 1 -eq 1 -a 0 -eq 1 ']'
++ flashcmd='python3 tegraflash.py  --chip 0x19 --bl nvtboot_recovery_cpu_t194.bin 	      --sdram_config tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg 	      --odmdata 0x9190000 	      --bldtb tegra194-p2888-0008-p2822-0000.dtb 	      --applet mb1_t194_prod.bin 	      --soft_fuses tegra194-mb1-soft-fuses-l4t.cfg 	      --cmd "flash;reboot"  	      --cfg flash.xml 	      --boot_chain A 	      --bct_backup 	      --secondary_gpt_backup 	      --uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg --minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg          --device_config tegra19x-mb1-bct-device-qspi-jaxi.cfg          --misc_config tegra194-mb1-bct-misc-flash-jaxi.cfg          --misc_cold_boot_config tegra194-mb1-bct-misc-l4t-jaxi.cfg          --pinmux_config tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg          --gpioint_config tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg          --pmic_config tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg          --pmc_config tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg          --prod_config tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg          --scr_config tegra194-mb1-bct-scr-cbb-mini.cfg          --scr_cold_boot_config tegra194-mb1-bct-scr-cbb-mini.cfg          --br_cmd_config tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg          --dev_params tegra194-br-bct-qspi-l4t.cfg,tegra194-br-bct_b-qspi-l4t.cfg          --overlay_dtb L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo --ramcode 1  	      --bins "mb2_bootloader nvtboot_recovery_t194.bin; mts_preboot preboot_c10_prod_cr.bin; mts_mce mce_c10_prod_cr.bin; mts_proper mts_c10_prod_cr.bin; bpmp_fw bpmp-2_t194.bin; bpmp_fw_dtb tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4.dtb; spe_fw spe_t194.bin; tos tos-optee_t194.img; eks eks.img; bootloader_dtb tegra194-p2888-0008-p2822-0000.dtb"'
++ '[' 0 -ne 0 ']'
++ '[' 0 -ne 0 ']'
++ '[' 0 -ne 0 ']'
++ eval python3 tegraflash.py --chip 0x19 --bl nvtboot_recovery_cpu_t194.bin --sdram_config tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg --odmdata 0x9190000 --bldtb tegra194-p2888-0008-p2822-0000.dtb --applet mb1_t194_prod.bin --soft_fuses tegra194-mb1-soft-fuses-l4t.cfg --cmd '"flash;reboot"' --cfg flash.xml --boot_chain A --bct_backup --secondary_gpt_backup --uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg --minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg --device_config tegra19x-mb1-bct-device-qspi-jaxi.cfg --misc_config tegra194-mb1-bct-misc-flash-jaxi.cfg --misc_cold_boot_config tegra194-mb1-bct-misc-l4t-jaxi.cfg --pinmux_config tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg --gpioint_config tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg --pmic_config tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg --pmc_config tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg --prod_config tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg --scr_config tegra194-mb1-bct-scr-cbb-mini.cfg --scr_cold_boot_config tegra194-mb1-bct-scr-cbb-mini.cfg --br_cmd_config tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg --dev_params tegra194-br-bct-qspi-l4t.cfg,tegra194-br-bct_b-qspi-l4t.cfg --overlay_dtb L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo --ramcode 1 --bins '"mb2_bootloader' 'nvtboot_recovery_t194.bin;' mts_preboot 'preboot_c10_prod_cr.bin;' mts_mce 'mce_c10_prod_cr.bin;' mts_proper 'mts_c10_prod_cr.bin;' bpmp_fw 'bpmp-2_t194.bin;' bpmp_fw_dtb 'tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4.dtb;' spe_fw 'spe_t194.bin;' tos 'tos-optee_t194.img;' eks 'eks.img;' bootloader_dtb 'tegra194-p2888-0008-p2822-0000.dtb"'
+++ python3 tegraflash.py --chip 0x19 --bl nvtboot_recovery_cpu_t194.bin --sdram_config tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg,tegra194-memcfg-sw-override.cfg --odmdata 0x9190000 --bldtb tegra194-p2888-0008-p2822-0000.dtb --applet mb1_t194_prod.bin --soft_fuses tegra194-mb1-soft-fuses-l4t.cfg --cmd 'flash;reboot' --cfg flash.xml --boot_chain A --bct_backup --secondary_gpt_backup --uphy_config tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg --minratchet_config tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg --device_config tegra19x-mb1-bct-device-qspi-jaxi.cfg --misc_config tegra194-mb1-bct-misc-flash-jaxi.cfg --misc_cold_boot_config tegra194-mb1-bct-misc-l4t-jaxi.cfg --pinmux_config tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg --gpioint_config tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg --pmic_config tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg --pmc_config tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg --prod_config tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg --scr_config tegra194-mb1-bct-scr-cbb-mini.cfg --scr_cold_boot_config tegra194-mb1-bct-scr-cbb-mini.cfg --br_cmd_config tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg --dev_params tegra194-br-bct-qspi-l4t.cfg,tegra194-br-bct_b-qspi-l4t.cfg --overlay_dtb L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo --ramcode 1 --bins 'mb2_bootloader nvtboot_recovery_t194.bin; mts_preboot preboot_c10_prod_cr.bin; mts_mce mce_c10_prod_cr.bin; mts_proper mts_c10_prod_cr.bin; bpmp_fw bpmp-2_t194.bin; bpmp_fw_dtb tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4.dtb; spe_fw spe_t194.bin; tos tos-optee_t194.img; eks eks.img; bootloader_dtb tegra194-p2888-0008-p2822-0000.dtb'
+Welcome to Tegra Flash
+version 1.0.0
+Type ? or help for help and q or quit to exit
+Use ! to execute system commands
+ 
+[   0.0339 ] tegrasign_v3.py --key None --getmode mode.txt
+[   0.0340 ] Assuming zero filled SBK key
+[   0.0028 ] Generating RCM messages
+[   0.0045 ] tegrahost_v2 --chip 0x19 0 --magicid MB1B --appendsigheader mb1_t194_prod.bin zerosbk
+[   0.0052 ] Header already present for mb1_t194_prod.bin
+[   0.0612 ] tegrasign_v3.py --key None --getmode mode.txt
+[   0.0613 ] Assuming zero filled SBK key
+[   0.0632 ] tegrasign_v3.py --file mb1_t194_prod_sigheader.bin --key None --length 1136 --offset 2960 --pubkeyhash pub_key.key
+[   0.0633 ] Assuming zero filled SBK key
+[   0.0649 ] Warning: pub_key.key is not found
+[   0.0352 ] tegrahost_v2 --chip 0x19 0 --updatesigheader mb1_t194_prod_sigheader.bin mb1_t194_prod_sigheader.hash zerosbk
+[   0.0396 ] tegrabct_v2 --chip 0x19 0 --sfuse tegra194-mb1-soft-fuses-l4t.cfg sfuse.bin
+[   0.0420 ] tegrabct_v2 --chip 0x19 0 --ratchet_blob ratchet_blob.bin --minratchet tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg
+[   0.0424 ] FwIndex: 1, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 2, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 3, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 4, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 5, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 6, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 7, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 11, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 12, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 13, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 14, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 15, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 16, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 17, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 18, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 19, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 30, MinRatchetLevel: 0
+[   0.0428 ] FwIndex: 31, MinRatchetLevel: 0
+[   0.0428 ] 
+[   0.0445 ] tegrarcm_v2 --listrcm rcm_list.xml --chip 0x19 0 --sfuses sfuse.bin --download rcm mb1_t194_prod_sigheader.bin 0 0
+[   0.0451 ] RCM 0 is saved as rcm_0.rcm
+[   0.0474 ] RCM 1 is saved as rcm_1.rcm
+[   0.0474 ] RCM 2 is saved as rcm_2.rcm
+[   0.0474 ] List of rcm files are saved in rcm_list.xml
+[   0.0474 ] 
+[   0.0474 ] Signing RCM messages
+[   0.0805 ] tegrasign_v3.py --key None --list rcm_list.xml --getmontgomeryvalues montgomery.bin --pubkeyhash pub_key.key
+[   0.0806 ] Assuming zero filled SBK key
+[   0.0838 ] Warning: pub_key.key is not found
+[   0.0525 ] Copying signature to RCM mesages
+[   0.0542 ] tegrarcm_v2 --chip 0x19 0 --updatesig rcm_list_signed.xml
+[   0.0551 ] odmdata (to decode) = 152633344
+[   0.0551 ] Odmdata strings: PCIE_XBAR_4_1_0_1_2,UFS_x1_L1,NVHS_PCIE,enable-debug-console,enable-denver-wdt
+[   0.0551 ] Bpmp odmdata config: {'pcie-xbar-config': [0, 1, 'PCIE_XBAR_4_1_0_1_2'], 'pcie-c0-endpoint-enable': [1, 0, ''], 'pcie-c4-endpoint-enable': [1, 0, ''], 'ufs-config': [0, 1, 'UFS_x1_L1'], 'sata-enable': [1, 0, ''], 'nvhs-owner': [0, 1, 'PCIE'], 'pcie-c5-endpoint-enable': [1, 0, '']}
+[   0.0784 ] bpmp_dtb is compressed; decompressing...
+[   0.0784 ] lz4c -df tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4.dtb tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4_with_odm.dtb
+[   0.0808 ]                                                                                [   0.0824 ] tegra194-a02-bpmp-p2 : decoded 178779 bytes 
+[   0.0824 ] 
+[   0.1460 ] Re-compressing updated bpmp_dtb
+[   0.1460 ] lz4c -zf tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4_with_odm.dtb tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4.dtb
+[   0.1467 ]                                                                                [   0.1571 ] Compressed 178779 bytes into 24063 bytes ==> 13.46%
+[   0.1571 ] 
+[   0.4225 ] Concatenating L4TConfiguration.dtbo,L4TRootfsInfo.dtbo,tegra194-p2822-camera-dual-imx274-overlay.dtbo,tegra194-p2822-camera-e3331-overlay.dtbo,tegra194-p2822-camera-e3333-overlay.dtbo,tegra194-p2822-camera-imx185-overlay.dtbo,tegra194-p2822-camera-imx390-overlay.dtbo,tegra194-p2888-0008-p2822-0000-overlay.dtbo to tegra194-p2888-0008-p2822-0000_with_odm_overlay.dtb
+[   0.4862 ] Parsing partition layout
+[   0.5178 ] tegraparser_v2 --pt flash.xml.tmp
+[   0.5227 ] Reading ramcode from backup chip_info.bin file
+[   0.5433 ] RAMCODE Read from Device: 1
+
+[   0.5435 ] Disable BPMP dtb trim, using default dtb
+[   0.5435 ] 
+[   0.5435 ] Creating list of images to be signed
+[   0.5471 ] tegrahost_v2 --chip 0x19 0 --partitionlayout flash.xml.bin --ratchet_blob ratchet_blob.bin --list images_list.xml zerosbk
+[   0.5490 ] MB1: Nvheader already present is mb1_t194_prod_aligned.bin
+[   0.5507 ] Header already present for mb1_t194_prod_aligned_sigheader.bin
+[   0.5512 ] MB1: Nvheader already present is mb1_t194_prod_aligned.bin
+[   0.5556 ] Header already present for mb1_t194_prod_aligned_sigheader.bin
+[   0.5566 ] adding BCH for dram-ecc-t194_aligned.bin
+[   0.6004 ] adding BCH for spe_t194_aligned.bin
+[   0.6152 ] adding BCH for nvtboot_t194_aligned.bin
+[   0.6210 ] Header already present for preboot_c10_prod_cr_aligned.bin
+[   0.6305 ] Header already present for mce_c10_prod_cr_aligned.bin
+[   0.6670 ] adding BCH for mts_c10_prod_cr_aligned.bin
+[   0.7344 ] Header already present for warmboot_t194_prod_aligned.bin
+[   0.7980 ] adding BCH for xusb_sil_rel_fw_aligned
+[   0.8188 ] adding BCH for nvdisp-init_aligned.bin
+[   0.8581 ] adding BCH for tegra194-p2888-0008-p2822-0000_aligned.dtb
+[   0.8751 ] adding BCH for tos-optee_t194_aligned.img
+[   0.9102 ] adding BCH for eks_aligned.img
+[   0.9269 ] adding BCH for adsp-fw_aligned.bin
+[   0.9397 ] adding BCH for camera-rtcpu-t194-rce_aligned.img
+[   0.9716 ] adding BCH for sce_t194_aligned.bin
+[   1.0015 ] adding BCH for bpmp-2_t194_aligned.bin
+[   1.0332 ] adding BCH for tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4_aligned.dtb
+[   1.0546 ] adding BCH for dram-ecc-t194_aligned.bin
+[   1.0550 ] adding BCH for spe_t194_aligned.bin
+[   1.0571 ] adding BCH for nvtboot_t194_aligned.bin
+[   1.0590 ] Header already present for preboot_c10_prod_cr_aligned.bin
+[   1.0627 ] Header already present for mce_c10_prod_cr_aligned.bin
+[   1.0631 ] adding BCH for mts_c10_prod_cr_aligned.bin
+[   1.0761 ] Header already present for warmboot_t194_prod_aligned.bin
+[   1.1373 ] adding BCH for xusb_sil_rel_fw_aligned
+[   1.1379 ] adding BCH for nvdisp-init_aligned.bin
+[   1.1404 ] adding BCH for tegra194-p2888-0008-p2822-0000_aligned.dtb
+[   1.1476 ] adding BCH for tos-optee_t194_aligned.img
+[   1.1557 ] adding BCH for eks_aligned.img
+[   1.1656 ] adding BCH for adsp-fw_aligned.bin
+[   1.1915 ] adding BCH for camera-rtcpu-t194-rce_aligned.img
+[   1.2053 ] adding BCH for sce_t194_aligned.bin
+[   1.2150 ] adding BCH for bpmp-2_t194_aligned.bin
+[   1.2221 ] adding BCH for tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4_aligned.dtb
+[   1.2406 ] Filling MB1 storage info
+[   1.2406 ] Parsing dev params for multi chains
+[   1.2406 ] Generating br-bct
+[   1.2428 ] Performing cfg overlay
+[   1.2429 ] ['tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg', 'tegra194-memcfg-sw-override.cfg']
+[   1.2430 ] sw_memcfg_overlay.pl -c tegra194-mb1-bct-memcfg-4x-derated-ecc-p2888.cfg -s tegra194-memcfg-sw-override.cfg -o /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1.cfg
+[   1.3109 ] Updating dev and MSS params in BR BCT
+[   1.3110 ] tegrabct_v2 --dev_param tegra194-br-bct-qspi-l4t.cfg --sdram /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1.cfg --brbct br_bct.cfg --sfuse tegra194-mb1-soft-fuses-l4t.cfg --chip 0x19 0
+[   1.3287 ] Updating bl info
+[   1.3306 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updateblinfo flash.xml.bin
+[   1.3327 ] Generating br-bct
+[   1.3347 ] Performing cfg overlay
+[   1.3347 ] ['/home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1.cfg']
+[   1.3347 ] Updating dev and MSS params in BR BCT
+[   1.3347 ] tegrabct_v2 --dev_param tegra194-br-bct_b-qspi-l4t.cfg --sdram /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1.cfg --brbct br_bct.cfg --sfuse tegra194-mb1-soft-fuses-l4t.cfg --chip 0x19 0
+[   1.3455 ] Updating bl info
+[   1.3473 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updateblinfo flash.xml.bin
+[   1.3500 ] Generating BCT backup image
+[   1.3500 ] dd if=/dev/zero of=bct_backup.img bs=1 count=32768
+[   1.3520 ] 32768+0 records in
+[   1.3976 ] 32768+0 records out
+[   1.3976 ] 32768 bytes (33 kB, 32 KiB) copied, 0.0452208 s, 725 kB/s
+[   1.3976 ] 
+[   1.3976 ] Concatenating BCT for chain A to bct_backup.img
+
+[   1.3976 ] dd if=br_bct_BR.bct of=bct_backup.img bs=1 seek=0 conv=notrunc
+[   1.3983 ] 2888+0 records in
+[   1.4019 ] 2888+0 records out
+[   1.4019 ] 2888 bytes (2.9 kB, 2.8 KiB) copied, 0.00331775 s, 870 kB/s
+[   1.4019 ] 
+[   1.4019 ] Concatenating BCT for chain B to bct_backup.img
+
+[   1.4019 ] dd if=br_bct_b_BR.bct of=bct_backup.img bs=1 seek=16384 conv=notrunc
+[   1.4026 ] 2888+0 records in
+[   1.4063 ] 2888+0 records out
+[   1.4063 ] 2888 bytes (2.9 kB, 2.8 KiB) copied, 0.00333874 s, 865 kB/s
+[   1.4063 ] 
+[   1.4064 ] Generating signatures
+[   1.4396 ] tegrasign_v3.py --key None --list images_list.xml --pubkeyhash pub_key.key
+[   1.4397 ] Assuming zero filled SBK key
+[   1.5189 ] Warning: pub_key.key is not found
+[   1.4876 ] Parsing dev params for multi chains
+[   1.4876 ] Generating br-bct
+[   1.4895 ] Performing cfg overlay
+[   1.4895 ] ['/home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1.cfg']
+[   1.4895 ] Updating dev and MSS params in BR BCT
+[   1.4895 ] tegrabct_v2 --dev_param tegra194-br-bct-qspi-l4t.cfg --sdram /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1.cfg --brbct br_bct.cfg --sfuse tegra194-mb1-soft-fuses-l4t.cfg --chip 0x19 0
+[   1.5008 ] Updating bl info
+[   1.5027 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updateblinfo flash.xml.bin --updatesig images_list_signed.xml
+[   1.5062 ] Updating smd info
+[   1.5080 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 --updatesmdinfo flash.xml.bin
+[   1.5091 ] Updating Odmdata
+[   1.5110 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updatefields Odmdata =0x9190000
+[   1.5122 ] Signing BCT
+[   1.5122 ] Get Signed section of bct
+[   1.5141 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --listbct bct_list.xml
+[   1.5482 ] tegrasign_v3.py --key None --list bct_list.xml --getmontgomeryvalues montgomery.bin --pubkeyhash pub_key.key
+[   1.5483 ] Assuming zero filled SBK key
+[   1.5496 ] Warning: pub_key.key is not found
+[   1.5183 ] Updating BCT with signature
+[   1.5202 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updatesig bct_list_signed.xml
+[   1.5210 ] Generating br-bct
+[   1.5230 ] Performing cfg overlay
+[   1.5230 ] ['/home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1.cfg']
+[   1.5230 ] Updating dev and MSS params in BR BCT
+[   1.5230 ] tegrabct_v2 --dev_param tegra194-br-bct_b-qspi-l4t.cfg --sdram /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1.cfg --brbct br_bct.cfg --sfuse tegra194-mb1-soft-fuses-l4t.cfg --chip 0x19 0
+[   1.5338 ] Updating bl info
+[   1.5356 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updateblinfo flash.xml.bin --updatesig images_list_signed.xml
+[   1.5392 ] Updating smd info
+[   1.5412 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 --updatesmdinfo flash.xml.bin
+[   1.5422 ] Updating Odmdata
+[   1.5440 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updatefields Odmdata =0x9190000
+[   1.5449 ] Signing BCT
+[   1.5449 ] Get Signed section of bct
+[   1.5468 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --listbct bct_list.xml
+[   1.5811 ] tegrasign_v3.py --key None --list bct_list.xml --getmontgomeryvalues montgomery.bin --pubkeyhash pub_key.key
+[   1.5812 ] Assuming zero filled SBK key
+[   1.5825 ] Warning: pub_key.key is not found
+[   1.5512 ] Updating BCT with signature
+[   1.5532 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x19 0 --updatesig bct_list_signed.xml
+[   1.5548 ] Generating BCT backup image
+[   1.5548 ] dd if=/dev/zero of=bct_backup.img bs=1 count=32768
+[   1.5556 ] 32768+0 records in
+[   1.6048 ] 32768+0 records out
+[   1.6048 ] 32768 bytes (33 kB, 32 KiB) copied, 0.0487868 s, 672 kB/s
+[   1.6048 ] 
+[   1.6049 ] Concatenating BCT for chain A to bct_backup.img
+
+[   1.6049 ] dd if=br_bct_BR.bct of=bct_backup.img bs=1 seek=0 conv=notrunc
+[   1.6059 ] 2888+0 records in
+[   1.6097 ] 2888+0 records out
+[   1.6097 ] 2888 bytes (2.9 kB, 2.8 KiB) copied, 0.00348345 s, 829 kB/s
+[   1.6097 ] 
+[   1.6097 ] Concatenating BCT for chain B to bct_backup.img
+
+[   1.6097 ] dd if=br_bct_b_BR.bct of=bct_backup.img bs=1 seek=16384 conv=notrunc
+[   1.6106 ] 2888+0 records in
+[   1.6144 ] 2888+0 records out
+[   1.6144 ] 2888 bytes (2.9 kB, 2.8 KiB) copied, 0.00342214 s, 844 kB/s
+[   1.6144 ] 
+[   1.6144 ] Generating coldboot mb1-bct
+[   1.6170 ] tegrabct_v2 --chip 0x19 0 --mb1bct mb1_cold_boot_bct.cfg --sdram /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1.cfg --misc tegra194-mb1-bct-misc-l4t-jaxi.cfg --scr tegra194-mb1-bct-scr-cbb-mini.cfg --pinmux tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg --pmc tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg --pmic tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg --brcommand tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg --prod tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg --gpioint tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg --uphy tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg --device tegra19x-mb1-bct-device-qspi-jaxi.cfg
+[   1.6176 ] MB1-BCT version: 0x1
+
+[   1.6180 ] Parsing config file :tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg 
+[   1.6182 ] Added Platform Config 0 data with size :- 3152
+
+[   1.6194 ] Parsing config file :tegra194-mb1-bct-scr-cbb-mini.cfg 
+[   1.6196 ] Added Platform Config 1 data with size :- 19640
+
+[   1.6739 ] Parsing config file :tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg 
+[   1.6742 ] Added Platform Config 2 data with size :- 24
+
+[   1.6743 ] Parsing config file :tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg 
+[   1.6746 ] Added Platform Config 4 data with size :- 348
+
+[   1.6747 ] Parsing config file :tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg 
+[   1.6750 ] Added Platform Config 3 data with size :- 92
+
+[   1.6752 ] Parsing config file :tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg 
+[   1.6754 ] Added Platform Config 5 data with size :- 68
+
+[   1.6755 ] Parsing config file :tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg 
+[   1.6758 ] Added Platform Config 7 data with size :- 392
+
+[   1.6987 ] Parsing config file :tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg 
+[   1.6990 ] Added Platform Config 8 data with size :- 12
+
+[   1.6991 ] Parsing config file :tegra19x-mb1-bct-device-qspi-jaxi.cfg 
+[   1.6993 ] Added Platform Config 9 data with size :- 40
+[   1.6993 ] 
+[   1.6993 ] Updating mb1-bct with firmware information
+[   1.7017 ] tegrabct_v2 --chip 0x19 --mb1bct mb1_cold_boot_bct_MB1.bct --updatefwinfo flash.xml.bin
+[   1.7031 ] Updating mb1-bct with storage information
+[   1.7049 ] tegrabct_v2 --chip 0x19 --mb1bct mb1_cold_boot_bct_MB1.bct --updatestorageinfo flash.xml.bin
+[   1.7063 ] Updating mb1-bct with ratchet information
+[   1.7082 ] tegrabct_v2 --chip 0x19 --mb1bct mb1_cold_boot_bct_MB1.bct --minratchet tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg
+[   1.7089 ] FwIndex: 1, MinRatchetLevel: 0
+[   1.7092 ] FwIndex: 2, MinRatchetLevel: 0
+[   1.7093 ] FwIndex: 3, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 4, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 5, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 6, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 7, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 11, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 12, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 13, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 14, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 15, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 16, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 17, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 18, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 19, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 30, MinRatchetLevel: 0
+[   1.7094 ] FwIndex: 31, MinRatchetLevel: 0
+[   1.7094 ] 
+[   1.7114 ] tegrahost_v2 --chip 0x19 --align mb1_cold_boot_bct_MB1_aligned.bct
+[   1.7142 ] tegrahost_v2 --chip 0x19 0 --magicid MBCT --ratchet_blob ratchet_blob.bin --appendsigheader mb1_cold_boot_bct_MB1_aligned.bct zerosbk
+[   1.7149 ] adding BCH for mb1_cold_boot_bct_MB1_aligned.bct
+[   1.7490 ] tegrasign_v3.py --key None --list mb1_cold_boot_bct_MB1_aligned_sigheader.bct_list.xml --pubkeyhash pub_key.key
+[   1.7491 ] Assuming zero filled SBK key
+[   1.7504 ] Warning: pub_key.key is not found
+[   1.7211 ] tegrahost_v2 --chip 0x19 0 --updatesigheader mb1_cold_boot_bct_MB1_aligned_sigheader.bct.encrypt mb1_cold_boot_bct_MB1_aligned_sigheader.bct.hash zerosbk
+[   1.7222 ] Generating recovery mb1-bct
+[   1.7241 ] tegrabct_v2 --chip 0x19 0 --mb1bct mb1_bct.cfg --sdram /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1.cfg --misc tegra194-mb1-bct-misc-flash-jaxi.cfg --scr tegra194-mb1-bct-scr-cbb-mini.cfg --pinmux tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg --pmc tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg --pmic tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg --brcommand tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg --prod tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg --gpioint tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg --uphy tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg --device tegra19x-mb1-bct-device-qspi-jaxi.cfg
+[   1.7247 ] MB1-BCT version: 0x1
+
+[   1.7250 ] Parsing config file :tegra19x-mb1-pinmux-p2888-0008-b01-p2822-0000-jaxi.cfg 
+[   1.7252 ] Added Platform Config 0 data with size :- 3152
+
+[   1.7263 ] Parsing config file :tegra194-mb1-bct-scr-cbb-mini.cfg 
+[   1.7265 ] Added Platform Config 1 data with size :- 19640
+
+[   1.7363 ] Parsing config file :tegra19x-mb1-padvoltage-p2888-0000-a00-p2822-0000-a00.cfg 
+[   1.7365 ] Added Platform Config 2 data with size :- 24
+
+[   1.7366 ] Parsing config file :tegra194-mb1-bct-pmic-p2888-0008-b01-p2822-0000.cfg 
+[   1.7369 ] Added Platform Config 4 data with size :- 348
+
+[   1.7370 ] Parsing config file :tegra194-mb1-bct-reset-p2888-0000-p2822-0000.cfg 
+[   1.7372 ] Added Platform Config 3 data with size :- 92
+[   1.7372 ] 
+[   1.7372 ] Parsing config file :tegra19x-mb1-prod-p2888-0000-p2822-0000.cfg 
+[   1.7372 ] Added Platform Config 5 data with size :- 68
+[   1.7372 ] 
+[   1.7372 ] Parsing config file :tegra194-mb1-bct-gpioint-p2888-0000-p2822-0000.cfg 
+[   1.7372 ] Added Platform Config 7 data with size :- 392
+[   1.7372 ] 
+[   1.7372 ] Parsing config file :tegra194-mb1-uphy-lane-p2888-0000-p2822-0000.cfg 
+[   1.7372 ] Added Platform Config 8 data with size :- 12
+[   1.7372 ] 
+[   1.7372 ] Parsing config file :tegra19x-mb1-bct-device-qspi-jaxi.cfg 
+[   1.7372 ] Added Platform Config 9 data with size :- 40
+[   1.7372 ] 
+[   1.7373 ] Updating mb1-bct with firmware information
+[   1.7392 ] tegrabct_v2 --chip 0x19 --mb1bct mb1_bct_MB1.bct --recov --updatefwinfo flash.xml.bin
+[   1.7404 ] Updating mb1-bct with storage information
+[   1.7423 ] tegrabct_v2 --chip 0x19 --mb1bct mb1_bct_MB1.bct --updatestorageinfo flash.xml.bin
+[   1.7433 ] Updating mb1-bct with ratchet information
+[   1.7451 ] tegrabct_v2 --chip 0x19 --mb1bct mb1_bct_MB1.bct --minratchet tegra194-mb1-bct-ratchet-p2888-0000-p2822-0000.cfg
+[   1.7458 ] FwIndex: 1, MinRatchetLevel: 0
+[   1.7460 ] FwIndex: 2, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 3, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 4, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 5, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 6, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 7, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 11, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 12, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 13, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 14, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 15, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 16, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 17, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 18, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 19, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 30, MinRatchetLevel: 0
+[   1.7462 ] FwIndex: 31, MinRatchetLevel: 0
+[   1.7462 ] 
+[   1.7481 ] tegrahost_v2 --chip 0x19 --align mb1_bct_MB1_aligned.bct
+[   1.7507 ] tegrahost_v2 --chip 0x19 0 --magicid MBCT --ratchet_blob ratchet_blob.bin --appendsigheader mb1_bct_MB1_aligned.bct zerosbk
+[   1.7515 ] adding BCH for mb1_bct_MB1_aligned.bct
+[   1.7855 ] tegrasign_v3.py --key None --list mb1_bct_MB1_aligned_sigheader.bct_list.xml --pubkeyhash pub_key.key
+[   1.7856 ] Assuming zero filled SBK key
+[   1.7868 ] Warning: pub_key.key is not found
+[   1.7575 ] tegrahost_v2 --chip 0x19 0 --updatesigheader mb1_bct_MB1_aligned_sigheader.bct.encrypt mb1_bct_MB1_aligned_sigheader.bct.hash zerosbk
+[   1.7587 ] Generating coldboot mem-bct
+[   1.7605 ] tegrabct_v2 --chip 0x19 0 --sdram /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1.cfg --membct /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1_1.bct /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1_2.bct /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1_3.bct /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1_4.bct
+[   1.7613 ] Packing sdram param for instance[0]
+[   1.7711 ] Packing sdram param for instance[1]
+[   1.7712 ] Packing sdram param for instance[2]
+[   1.7713 ] Packing sdram param for instance[3]
+[   1.7713 ] Packing sdram param for instance[4]
+[   1.7713 ] Packing sdram param for instance[5]
+[   1.7713 ] Packing sdram param for instance[6]
+[   1.7713 ] Packing sdram param for instance[7]
+[   1.7713 ] Packing sdram param for instance[8]
+[   1.7713 ] Packing sdram param for instance[9]
+[   1.7713 ] Packing sdram param for instance[10]
+[   1.7713 ] Packing sdram param for instance[11]
+[   1.7713 ] Packing sdram param for instance[12]
+[   1.7713 ] Packing sdram param for instance[13]
+[   1.7713 ] Packing sdram param for instance[14]
+[   1.7713 ] Packing sdram param for instance[15]
+[   1.7713 ] 
+[   1.7713 ] Getting sector size from pt
+[   1.7732 ] tegraparser_v2 --getsectorsize flash.xml.bin sector_info.bin
+[   1.7741 ] BlockSize read from layout is 200
+
+[   1.7759 ] tegrahost_v2 --chip 0x19 0 --blocksize 512 --magicid MEMB --addsigheader_multi /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1_1.bct /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1_2.bct /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1_3.bct /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1_4.bct
+[   1.7767 ] adding BCH for /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1_1.bct
+[   1.7804 ] tegrahost_v2 --chip 0x19 --align mem_coldboot_aligned.bct
+[   1.7830 ] tegrahost_v2 --chip 0x19 0 --magicid MEMB --ratchet_blob ratchet_blob.bin --appendsigheader mem_coldboot_aligned.bct zerosbk
+[   1.7836 ] Header already present for mem_coldboot_aligned.bct
+[   1.8173 ] tegrasign_v3.py --key None --list mem_coldboot_aligned_sigheader.bct_list.xml --pubkeyhash pub_key.key
+[   1.8174 ] Assuming zero filled SBK key
+[   1.8189 ] Warning: pub_key.key is not found
+[   1.7895 ] tegrahost_v2 --chip 0x19 0 --updatesigheader mem_coldboot_aligned_sigheader.bct.encrypt mem_coldboot_aligned_sigheader.bct.hash zerosbk
+[   1.7907 ] Generating recovery mem-bct
+[   1.7925 ] tegrabct_v2 --chip 0x19 0 --sdram /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1.cfg --membct /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1_1.bct /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1_2.bct /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1_3.bct /home/local/RESQUARED/gene.sally/external/stevie/jetson-linux-20230410134817/3222356/tmpg8tcy7eq1_4.bct
+[   1.7932 ] Packing sdram param for instance[0]
+[   1.8031 ] Packing sdram param for instance[1]
+[   1.8033 ] Packing sdram param for instance[2]
+[   1.8034 ] Packing sdram param for instance[3]
+[   1.8035 ] Packing sdram param for instance[4]
+[   1.8036 ] Packing sdram param for instance[5]
+[   1.8037 ] Packing sdram param for instance[6]
+[   1.8038 ] Packing sdram param for instance[7]
+[   1.8040 ] Packing sdram param for instance[8]
+[   1.8041 ] Packing sdram param for instance[9]
+[   1.8042 ] Packing sdram param for instance[10]
+[   1.8043 ] Packing sdram param for instance[11]
+[   1.8044 ] Packing sdram param for instance[12]
+[   1.8046 ] Packing sdram param for instance[13]
+[   1.8047 ] Packing sdram param for instance[14]
+[   1.8048 ] Packing sdram param for instance[15]
+[   1.8368 ] tegrahost_v2 --chip 0x19 --align mem_rcm_aligned.bct
+[   1.8395 ] tegrahost_v2 --chip 0x19 0 --magicid MEMB --ratchet_blob ratchet_blob.bin --appendsigheader mem_rcm_aligned.bct zerosbk
+[   1.8403 ] adding BCH for mem_rcm_aligned.bct
+[   1.8746 ] tegrasign_v3.py --key None --list mem_rcm_aligned_sigheader.bct_list.xml --pubkeyhash pub_key.key
+[   1.8747 ] Assuming zero filled SBK key
+[   1.8761 ] Warning: pub_key.key is not found
+[   1.8467 ] tegrahost_v2 --chip 0x19 0 --updatesigheader mem_rcm_aligned_sigheader.bct.encrypt mem_rcm_aligned_sigheader.bct.hash zerosbk
+[   1.8480 ] Copying signatures
+[   1.8498 ] tegrahost_v2 --chip 0x19 0 --partitionlayout flash.xml.bin --updatesig images_list_signed.xml
+[   2.0103 ] Boot Rom communication
+[   2.0125 ] tegrarcm_v2 --chip 0x19 0 --rcm rcm_list_signed.xml
+[   2.0132 ] BR_CID: 0x880219116405608224000000170180c0
+[   2.0412 ] RCM version 0X190001
+[   2.0898 ] Boot Rom communication completed
+[   4.1201 ] tegrarcm_v2 --isapplet
+[   4.1226 ] Applet version 01.00.0000
+[   4.1966 ] Sending BCTs
+[   4.1988 ] tegrarcm_v2 --download bct_bootrom br_bct_BR.bct --download bct_mb1 mb1_bct_MB1_sigheader.bct.encrypt --download bct_mem mem_rcm_sigheader.bct.encrypt
+[   4.1995 ] Applet version 01.00.0000
+[   4.2984 ] Sending bct_bootrom
+[   4.2984 ] [................................................] 100%
+[   4.2998 ] Sending bct_mb1
+[   4.3049 ] [................................................] 100%
+[   4.3098 ] Sending bct_mem
+[   4.3602 ] [................................................] 100%
+[  12.4166 ] Generating blob
+[  12.4379 ] tegrahost_v2 --chip 0x19 --align blob_nvtboot_recovery_cpu_t194_aligned.bin
+[  12.4409 ] tegrahost_v2 --chip 0x19 0 --magicid CPBL --ratchet_blob ratchet_blob.bin --appendsigheader blob_nvtboot_recovery_cpu_t194_aligned.bin zerosbk
+[  12.4416 ] adding BCH for blob_nvtboot_recovery_cpu_t194_aligned.bin
+[  12.4795 ] tegrasign_v3.py --key None --list blob_nvtboot_recovery_cpu_t194_aligned_sigheader.bin_list.xml --pubkeyhash pub_key.key
+[  12.4797 ] Assuming zero filled SBK key
+[  12.4814 ] Warning: pub_key.key is not found
+[  12.4522 ] tegrahost_v2 --chip 0x19 0 --updatesigheader blob_nvtboot_recovery_cpu_t194_aligned_sigheader.bin.encrypt blob_nvtboot_recovery_cpu_t194_aligned_sigheader.bin.hash zerosbk
+[  12.4584 ] tegrahost_v2 --chip 0x19 --align blob_nvtboot_recovery_t194_aligned.bin
+[  12.4611 ] tegrahost_v2 --chip 0x19 0 --magicid MB2B --ratchet_blob ratchet_blob.bin --appendsigheader blob_nvtboot_recovery_t194_aligned.bin zerosbk
+[  12.4617 ] adding BCH for blob_nvtboot_recovery_t194_aligned.bin
+[  12.4992 ] tegrasign_v3.py --key None --list blob_nvtboot_recovery_t194_aligned_sigheader.bin_list.xml --pubkeyhash pub_key.key
+[  12.4993 ] Assuming zero filled SBK key
+[  12.5010 ] Warning: pub_key.key is not found
+[  12.4716 ] tegrahost_v2 --chip 0x19 0 --updatesigheader blob_nvtboot_recovery_t194_aligned_sigheader.bin.encrypt blob_nvtboot_recovery_t194_aligned_sigheader.bin.hash zerosbk
+[  12.4764 ] tegrahost_v2 --chip 0x19 --align blob_preboot_c10_prod_cr_aligned.bin
+[  12.4790 ] tegrahost_v2 --chip 0x19 0 --magicid MTSP --appendsigheader blob_preboot_c10_prod_cr_aligned.bin zerosbk
+[  12.4799 ] Header already present for blob_preboot_c10_prod_cr_aligned.bin
+[  12.5136 ] tegrasign_v3.py --key None --list blob_preboot_c10_prod_cr_aligned_sigheader.bin_list.xml --pubkeyhash pub_key.key
+[  12.5137 ] Assuming zero filled SBK key
+[  12.5152 ] Warning: pub_key.key is not found
+[  12.4860 ] tegrahost_v2 --chip 0x19 0 --updatesigheader blob_preboot_c10_prod_cr_aligned_sigheader.bin.encrypt blob_preboot_c10_prod_cr_aligned_sigheader.bin.hash zerosbk
+[  12.4893 ] tegrahost_v2 --chip 0x19 --align blob_mce_c10_prod_cr_aligned.bin
+[  12.4919 ] tegrahost_v2 --chip 0x19 0 --magicid MTSM --appendsigheader blob_mce_c10_prod_cr_aligned.bin zerosbk
+[  12.4926 ] Header already present for blob_mce_c10_prod_cr_aligned.bin
+[  12.5272 ] tegrasign_v3.py --key None --list blob_mce_c10_prod_cr_aligned_sigheader.bin_list.xml --pubkeyhash pub_key.key
+[  12.5273 ] Assuming zero filled SBK key
+[  12.5287 ] Warning: pub_key.key is not found
+[  12.4993 ] tegrahost_v2 --chip 0x19 0 --updatesigheader blob_mce_c10_prod_cr_aligned_sigheader.bin.encrypt blob_mce_c10_prod_cr_aligned_sigheader.bin.hash zerosbk
+[  12.5052 ] tegrahost_v2 --chip 0x19 --align blob_mts_c10_prod_cr_aligned.bin
+[  12.5078 ] tegrahost_v2 --chip 0x19 0 --magicid MTSB --appendsigheader blob_mts_c10_prod_cr_aligned.bin zerosbk
+[  12.5084 ] adding BCH for blob_mts_c10_prod_cr_aligned.bin
+[  12.5996 ] tegrasign_v3.py --key None --list blob_mts_c10_prod_cr_aligned_sigheader.bin_list.xml --pubkeyhash pub_key.key
+[  12.5997 ] Assuming zero filled SBK key
+[  12.6059 ] Warning: pub_key.key is not found
+[  12.5766 ] tegrahost_v2 --chip 0x19 0 --updatesigheader blob_mts_c10_prod_cr_aligned_sigheader.bin.encrypt blob_mts_c10_prod_cr_aligned_sigheader.bin.hash zerosbk
+[  12.6184 ] tegrahost_v2 --chip 0x19 --align blob_bpmp-2_t194_aligned.bin
+[  12.6211 ] tegrahost_v2 --chip 0x19 0 --magicid BPMF --ratchet_blob ratchet_blob.bin --appendsigheader blob_bpmp-2_t194_aligned.bin zerosbk
+[  12.6218 ] adding BCH for blob_bpmp-2_t194_aligned.bin
+[  12.6720 ] tegrasign_v3.py --key None --list blob_bpmp-2_t194_aligned_sigheader.bin_list.xml --pubkeyhash pub_key.key
+[  12.6721 ] Assuming zero filled SBK key
+[  12.6748 ] Warning: pub_key.key is not found
+[  12.6455 ] tegrahost_v2 --chip 0x19 0 --updatesigheader blob_bpmp-2_t194_aligned_sigheader.bin.encrypt blob_bpmp-2_t194_aligned_sigheader.bin.hash zerosbk
+[  12.6567 ] tegrahost_v2 --chip 0x19 --align blob_tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4_aligned.dtb
+[  12.6593 ] tegrahost_v2 --chip 0x19 0 --magicid BPMD --ratchet_blob ratchet_blob.bin --appendsigheader blob_tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4_aligned.dtb zerosbk
+[  12.6599 ] adding BCH for blob_tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4_aligned.dtb
+[  12.6939 ] tegrasign_v3.py --key None --list blob_tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4_aligned_sigheader.dtb_list.xml --pubkeyhash pub_key.key
+[  12.6940 ] Assuming zero filled SBK key
+[  12.6955 ] Warning: pub_key.key is not found
+[  12.6661 ] tegrahost_v2 --chip 0x19 0 --updatesigheader blob_tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4_aligned_sigheader.dtb.encrypt blob_tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4_aligned_sigheader.dtb.hash zerosbk
+[  12.6694 ] tegrahost_v2 --chip 0x19 --align blob_spe_t194_aligned.bin
+[  12.6720 ] tegrahost_v2 --chip 0x19 0 --magicid SPEF --ratchet_blob ratchet_blob.bin --appendsigheader blob_spe_t194_aligned.bin zerosbk
+[  12.6727 ] adding BCH for blob_spe_t194_aligned.bin
+[  12.7077 ] tegrasign_v3.py --key None --list blob_spe_t194_aligned_sigheader.bin_list.xml --pubkeyhash pub_key.key
+[  12.7078 ] Assuming zero filled SBK key
+[  12.7093 ] Warning: pub_key.key is not found
+[  12.6800 ] tegrahost_v2 --chip 0x19 0 --updatesigheader blob_spe_t194_aligned_sigheader.bin.encrypt blob_spe_t194_aligned_sigheader.bin.hash zerosbk
+[  12.6839 ] tegrahost_v2 --chip 0x19 --align blob_tos-optee_t194_aligned.img
+[  12.6865 ] tegrahost_v2 --chip 0x19 0 --magicid TOSB --ratchet_blob ratchet_blob.bin --appendsigheader blob_tos-optee_t194_aligned.img zerosbk
+[  12.6872 ] adding BCH for blob_tos-optee_t194_aligned.img
+[  12.7296 ] tegrasign_v3.py --key None --list blob_tos-optee_t194_aligned_sigheader.img_list.xml --pubkeyhash pub_key.key
+[  12.7297 ] Assuming zero filled SBK key
+[  12.7316 ] Warning: pub_key.key is not found
+[  12.7012 ] tegrahost_v2 --chip 0x19 0 --updatesigheader blob_tos-optee_t194_aligned_sigheader.img.encrypt blob_tos-optee_t194_aligned_sigheader.img.hash zerosbk
+[  12.7092 ] tegrahost_v2 --chip 0x19 --align blob_eks_aligned.img
+[  12.7120 ] tegrahost_v2 --chip 0x19 0 --magicid EKSB --ratchet_blob ratchet_blob.bin --appendsigheader blob_eks_aligned.img zerosbk
+[  12.7127 ] adding BCH for blob_eks_aligned.img
+[  12.7461 ] tegrasign_v3.py --key None --list blob_eks_aligned_sigheader.img_list.xml --pubkeyhash pub_key.key
+[  12.7463 ] Assuming zero filled SBK key
+[  12.7476 ] Warning: pub_key.key is not found
+[  12.7183 ] tegrahost_v2 --chip 0x19 0 --updatesigheader blob_eks_aligned_sigheader.img.encrypt blob_eks_aligned_sigheader.img.hash zerosbk
+[  12.7215 ] tegrahost_v2 --chip 0x19 --align blob_tegra194-p2888-0008-p2822-0000_aligned.dtb
+[  12.7242 ] tegrahost_v2 --chip 0x19 0 --magicid CDTB --ratchet_blob ratchet_blob.bin --appendsigheader blob_tegra194-p2888-0008-p2822-0000_aligned.dtb zerosbk
+[  12.7249 ] adding BCH for blob_tegra194-p2888-0008-p2822-0000_aligned.dtb
+[  12.7660 ] tegrasign_v3.py --key None --list blob_tegra194-p2888-0008-p2822-0000_aligned_sigheader.dtb_list.xml --pubkeyhash pub_key.key
+[  12.7662 ] Assuming zero filled SBK key
+[  12.7680 ] Warning: pub_key.key is not found
+[  12.7386 ] tegrahost_v2 --chip 0x19 0 --updatesigheader blob_tegra194-p2888-0008-p2822-0000_aligned_sigheader.dtb.encrypt blob_tegra194-p2888-0008-p2822-0000_aligned_sigheader.dtb.hash zerosbk
+[  12.7453 ] tegrahost_v2 --chip 0x19 --generateblob blob.xml blob.bin
+[  12.7460 ] number of images in blob are 11
+[  12.7462 ] blobsize is 6184024
+[  12.7463 ] Added binary blob_nvtboot_recovery_cpu_t194_sigheader.bin.encrypt of size 232736
+[  12.7480 ] Added binary blob_nvtboot_recovery_t194_sigheader.bin.encrypt of size 206016
+[  12.7483 ] Added binary blob_preboot_c10_prod_cr_sigheader.bin.encrypt of size 24016
+[  12.7485 ] Added binary blob_mce_c10_prod_cr_sigheader.bin.encrypt of size 145184
+[  12.7487 ] Added binary blob_mts_c10_prod_cr_sigheader.bin.encrypt of size 3430416
+[  12.7494 ] Added binary blob_bpmp-2_t194_sigheader.bin.encrypt of size 1007392
+[  12.7500 ] Added binary blob_tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4_sigheader.dtb.encrypt of size 28160
+[  12.7503 ] Added binary blob_spe_t194_sigheader.bin.encrypt of size 95232
+[  12.7505 ] Added binary blob_tos-optee_t194_sigheader.img.encrypt of size 550288
+[  12.7507 ] Added binary blob_eks_sigheader.img.encrypt of size 5136
+[  12.7509 ] Added binary blob_tegra194-p2888-0008-p2822-0000_sigheader.dtb.encrypt of size 459264
+[  12.7528 ] Sending bootloader and pre-requisite binaries
+[  12.7550 ] tegrarcm_v2 --download blob blob.bin
+[  12.7559 ] Applet version 01.00.0000
+[  12.8305 ] Sending blob
+[  12.8306 ] [........                                        ] 016%[  12.8306 ] [................                                ] 033%[  12.8306 ] [.........................                       ] 050%[  12.8306 ] [.................................               ] 067%[  12.8306 ] [..........................................      ] 084%[  12.8306 ] [................................................] 100%
+[  13.9481 ] tegrarcm_v2 --boot recovery
+[  13.9504 ] Applet version 01.00.0000
+[  15.0353 ] tegrarcm_v2 --isapplet
+[  15.8301 ] tegrarcm_v2 --ismb2
+[  15.9773 ] tegradevflash_v2 --iscpubl
+[  15.9786 ] Bootloader version 01.00.0000
+[  16.0062 ] Bootloader version 01.00.0000
+[  16.0088 ] Retrieving storage infomation
+[  16.0112 ] tegrarcm_v2 --oem platformdetails storage storage_info.bin
+[  16.0122 ] Applet is not running on device. Continue with Bootloader
+[  16.1182 ] tegradevflash_v2 --oem platformdetails storage storage_info.bin
+[  16.1191 ] Bootloader version 01.00.0000
+[  16.1660 ] Saved platform info in storage_info.bin
+[  16.1682 ] Flashing the device
+[  16.1707 ] tegraparser_v2 --storageinfo storage_info.bin --generategpt --pt flash.xml.bin
+[  16.1716 ] gpt_secondary_3_0.bin:
+[  16.1719 ] partition_id	partition_name			      StartingLba	EndingLba
+[  16.1721 ]            1	BCT                                 	       0	    1023
+[  16.1724 ]            2	mb1                                 	    1024	    1535
+[  16.1726 ]            3	mb1_b                               	    1536	    2047
+[  16.1729 ]            4	MB1_BCT                             	    2048	    2559
+[  16.1731 ]            5	dram-ecc-fw                         	    2560	    3071
+[  16.1734 ]            6	badpage-fw                          	    3072	    4095
+[  16.1736 ]            7	MEM_BCT                             	    4096	    4607
+[  16.1739 ]            8	spe-fw                              	    4608	    5119
+[  16.1741 ]            9	mb2                                 	    5120	    5631
+[  16.1743 ]           10	mts-preboot                         	    5632	    6143
+[  16.1746 ]           11	mts-mce                             	    6144	    6655
+[  16.1746 ]           12	mts-proper                          	    6656	   14847
+[  16.1746 ]           13	sc7                                 	   14848	   15359
+[  16.1746 ]           14	xusb-fw                             	   15360	   15871
+[  16.1746 ]           15	cpu-bootloader                      	   15872	   24063
+[  16.1746 ]           16	bootloader-dtb                      	   24064	   25087
+[  16.1746 ]           17	secure-os                           	   25088	   30207
+[  16.1746 ]           18	eks                                 	   30208	   30719
+[  16.1746 ]           19	adsp-fw                             	   30720	   32767
+[  16.1746 ]           20	rce-fw                              	   32768	   34815
+[  16.1746 ]           21	sce-fw                              	   34816	   36863
+[  16.1746 ]           22	bpmp-fw                             	   36864	   39935
+[  16.1746 ]           23	bpmp-fw-dtb                         	   39936	   41983
+[  16.1746 ]           24	reserved_for_chain_A_boot           	   41984	   46079
+[  16.1746 ]           25	MB1_BCT_b                           	   46080	   46591
+[  16.1746 ]           26	dram-ecc-fw_b                       	   46592	   47103
+[  16.1746 ]           27	badpage-fw_b                        	   47104	   48127
+[  16.1746 ]           28	MEM_BCT_b                           	   48128	   48639
+[  16.1746 ]           29	spe-fw_b                            	   48640	   49151
+[  16.1746 ]           30	mb2_b                               	   49152	   49663
+[  16.1746 ]           31	mts-preboot_b                       	   49664	   50175
+[  16.1746 ]           32	mts-mce_b                           	   50176	   50687
+[  16.1746 ]           33	mts-proper_b                        	   50688	   58879
+[  16.1746 ]           34	sc7_b                               	   58880	   59391
+[  16.1746 ]           35	xusb-fw_b                           	   59392	   59903
+[  16.1746 ]           36	cpu-bootloader_b                    	   59904	   68095
+[  16.1746 ]           37	bootloader-dtb_b                    	   68096	   69119
+[  16.1746 ]           38	secure-os_b                         	   69120	   74239
+[  16.1746 ]           39	eks_b                               	   74240	   74751
+[  16.1746 ]           40	adsp-fw_b                           	   74752	   76799
+[  16.1746 ]           41	rce-fw_b                            	   76800	   78847
+[  16.1746 ]           42	sce-fw_b                            	   78848	   80895
+[  16.1746 ]           43	bpmp-fw_b                           	   80896	   83967
+[  16.1746 ]           44	bpmp-fw-dtb_b                       	   83968	   86015
+[  16.1746 ]           45	reserved_for_chain_B_boot           	   86016	   90111
+[  16.1746 ]           46	uefi_variables                      	   90112	   90623
+[  16.1746 ]           47	uefi_ftw                            	   90624	   91647
+[  16.1746 ]           48	BCT-boot-chain_backup               	  128000	  128511
+[  16.1746 ]           49	reserved_partition                  	  128512	  129023
+[  16.1746 ]           50	secondary_gpt_backup                	  129024	  129535
+[  16.1746 ]           51	VER_b                               	  129536	  130047
+[  16.1746 ]           52	VER                                 	  130048	  130559
+[  16.1747 ] gpt_primary_1_3.bin:
+[  16.1747 ] partition_id	partition_name			      StartingLba	EndingLba
+[  16.1747 ]            1	APP                                 	      40	58720295
+[  16.1747 ]            2	kernel                              	58720296	58851367
+[  16.1747 ]            3	kernel-dtb                          	58851368	58852263
+[  16.1747 ]            4	reserved_for_chain_A_user           	58852264	58917799
+[  16.1747 ]            5	kernel_b                            	58917800	59048871
+[  16.1747 ]            6	kernel-dtb_b                        	59048872	59049767
+[  16.1747 ]            7	reserved_for_chain_B_user           	59049768	59115303
+[  16.1747 ]            8	recovery                            	59115304	59279143
+[  16.1747 ]            9	recovery-dtb                        	59279144	59280167
+[  16.1747 ]           10	RECROOTFS                           	59280168	59894567
+[  16.1747 ]           11	esp                                 	59894568	60025639
+[  16.1747 ]           12	UDA                                 	60025640	124321758
+[  16.1747 ] gpt_secondary_1_3.bin:
+[  16.1747 ] partition_id	partition_name			      StartingLba	EndingLba
+[  16.1747 ]            1	APP                                 	      40	58720295
+[  16.1747 ]            2	kernel                              	58720296	58851367
+[  16.1747 ]            3	kernel-dtb                          	58851368	58852263
+[  16.1747 ]            4	reserved_for_chain_A_user           	58852264	58917799
+[  16.1747 ]            5	kernel_b                            	58917800	59048871
+[  16.1747 ]            6	kernel-dtb_b                        	59048872	59049767
+[  16.1747 ]            7	reserved_for_chain_B_user           	59049768	59115303
+[  16.1747 ]            8	recovery                            	59115304	59279143
+[  16.1747 ]            9	recovery-dtb                        	59279144	59280167
+[  16.1747 ]           10	RECROOTFS                           	59280168	59894567
+[  16.1747 ]           11	esp                                 	59894568	60025639
+[  16.1747 ]           12	UDA                                 	60025640	124321758
+[  16.1747 ] 
+[  16.1747 ] Start flashing
+[  16.1766 ] tegradevflash_v2 --pt flash.xml.bin --create
+[  16.1773 ] Bootloader version 01.00.0000
+[  16.2100 ] Erasing spi: 0 ......... [Done]
+[ 251.2271 ] Writing partition secondary_gpt with gpt_secondary_3_0.bin [ 16896 bytes ]
+[ 251.2273 ] [................................................] 100%
+
+[ 251.3442 ] Erasing sdmmc_user: 3 ......... [Done]
+[ 252.5585 ] Writing partition master_boot_record with mbr_1_3.bin [ 512 bytes ]
+[ 252.5593 ] [................................................] 100%
+[ 252.5607 ] Writing partition primary_gpt with gpt_primary_1_3.bin [ 16896 bytes ]
+[ 252.5680 ] [................................................] 100%
+[ 252.5707 ] Writing partition secondary_gpt with gpt_secondary_1_3.bin [ 16896 bytes ]
+[ 252.5912 ] [................................................] 100%
+
+[ 252.6131 ] Writing partition mb1 with mb1_t194_prod_aligned_sigheader.bin.encrypt [ 248944 bytes ]
+[ 252.6141 ] [................................................] 100%
+[ 252.6316 ] Writing partition mb1_b with mb1_t194_prod_aligned_sigheader.bin.encrypt [ 248944 bytes ]
+[ 254.2186 ] [................................................] 100%
+[ 254.2371 ] Writing partition dram-ecc-fw with dram-ecc-t194_sigheader.bin.encrypt [ 101856 bytes ]
+[ 255.8231 ] [................................................] 100%
+[ 255.8312 ] Writing partition badpage-fw with badpage.bin [ 4096 bytes ]
+[ 256.4858 ] [................................................] 100%
+[ 256.4886 ] Writing partition spe-fw with spe_t194_sigheader.bin.encrypt [ 95232 bytes ]
+[ 256.5224 ] [................................................] 100%
+[ 256.5297 ] Writing partition mb2 with nvtboot_t194_sigheader.bin.encrypt [ 207584 bytes ]
+[ 257.1361 ] [................................................] 100%
+[ 257.1514 ] Writing partition mts-preboot with preboot_c10_prod_cr_sigheader.bin.encrypt [ 24016 bytes ]
+[ 258.4728 ] [................................................] 100%
+[ 258.4756 ] Writing partition mts-mce with mce_c10_prod_cr_sigheader.bin.encrypt [ 145184 bytes ]
+[ 258.6393 ] [................................................] 100%
+[ 258.6492 ] Writing partition mts-proper with mts_c10_prod_cr_sigheader.bin.encrypt [ 3430416 bytes ]
+[ 259.5768 ] [...............                                 ] 030%[ 259.5768 ] [..............................                  ] 061%[ 259.5768 ] [.............................................   ] 091%[ 259.5768 ] [................................................] 100%
+[ 279.6390 ] Writing partition sc7 with warmboot_t194_prod_sigheader.bin.encrypt [ 55264 bytes ]
+[ 281.4463 ] [................................................] 100%
+[ 281.4510 ] Writing partition xusb-fw with xusb_sil_rel_fw_sigheader.encrypt [ 133120 bytes ]
+[ 281.8104 ] [................................................] 100%
+[ 281.8205 ] Writing partition cpu-bootloader with nvdisp-init_sigheader.bin.encrypt [ 397312 bytes ]
+[ 282.6659 ] [................................................] 100%
+[ 282.6926 ] Writing partition bootloader-dtb with tegra194-p2888-0008-p2822-0000_sigheader.dtb.encrypt [ 459264 bytes ]
+[ 285.2026 ] [................................................] 100%
+[ 285.2323 ] Writing partition secure-os with tos-optee_t194_sigheader.img.encrypt [ 550288 bytes ]
+[ 288.1323 ] [................................................] 100%
+[ 288.1664 ] Writing partition eks with eks_sigheader.img.encrypt [ 5136 bytes ]
+[ 291.6444 ] [................................................] 100%
+[ 291.6462 ] Writing partition adsp-fw with adsp-fw_sigheader.bin.encrypt [ 396880 bytes ]
+[ 291.6923 ] [................................................] 100%
+[ 291.7168 ] Writing partition rce-fw with camera-rtcpu-t194-rce_sigheader.img.encrypt [ 529776 bytes ]
+[ 294.2301 ] [................................................] 100%
+[ 294.2657 ] Writing partition sce-fw with sce_t194_sigheader.bin.encrypt [ 376576 bytes ]
+[ 297.6130 ] [................................................] 100%
+[ 297.6395 ] Writing partition bpmp-fw with bpmp-2_t194_sigheader.bin.encrypt [ 1007392 bytes ]
+[ 300.0236 ] [................................................] 100%
+[ 300.0907 ] Writing partition bpmp-fw-dtb with tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4_sigheader.dtb.encrypt [ 28160 bytes ]
+[ 306.4476 ] [................................................] 100%
+[ 306.4498 ] Writing partition dram-ecc-fw_b with dram-ecc-t194_sigheader.bin.encrypt [ 101856 bytes ]
+[ 306.6346 ] [................................................] 100%
+[ 306.6420 ] Writing partition badpage-fw_b with badpage.bin [ 4096 bytes ]
+[ 307.2944 ] [................................................] 100%
+[ 307.2963 ] Writing partition spe-fw_b with spe_t194_sigheader.bin.encrypt [ 95232 bytes ]
+[ 307.3290 ] [................................................] 100%
+[ 307.3368 ] Writing partition mb2_b with nvtboot_t194_sigheader.bin.encrypt [ 207584 bytes ]
+[ 307.9438 ] [................................................] 100%
+[ 307.9582 ] Writing partition mts-preboot_b with preboot_c10_prod_cr_sigheader.bin.encrypt [ 24016 bytes ]
+[ 309.2794 ] [................................................] 100%
+[ 309.2824 ] Writing partition mts-mce_b with mce_c10_prod_cr_sigheader.bin.encrypt [ 145184 bytes ]
+[ 309.4449 ] [................................................] 100%
+[ 309.4551 ] Writing partition mts-proper_b with mts_c10_prod_cr_sigheader.bin.encrypt [ 3430416 bytes ]
+[ 310.3807 ] [...............                                 ] 030%[ 310.3807 ] [..............................                  ] 061%[ 310.3807 ] [.............................................   ] 091%[ 310.3807 ] [................................................] 100%
+[ 330.4278 ] Writing partition sc7_b with warmboot_t194_prod_sigheader.bin.encrypt [ 55264 bytes ]
+[ 332.2345 ] [................................................] 100%
+[ 332.2390 ] Writing partition xusb-fw_b with xusb_sil_rel_fw_sigheader.encrypt [ 133120 bytes ]
+[ 332.5989 ] [................................................] 100%
+[ 332.6084 ] Writing partition cpu-bootloader_b with nvdisp-init_sigheader.bin.encrypt [ 397312 bytes ]
+[ 333.4523 ] [................................................] 100%
+[ 333.4773 ] Writing partition bootloader-dtb_b with tegra194-p2888-0008-p2822-0000_sigheader.dtb.encrypt [ 459264 bytes ]
+[ 335.9875 ] [................................................] 100%
+[ 336.0178 ] Writing partition secure-os_b with tos-optee_t194_sigheader.img.encrypt [ 550288 bytes ]
+[ 338.9169 ] [................................................] 100%
+[ 338.9516 ] Writing partition eks_b with eks_sigheader.img.encrypt [ 5136 bytes ]
+[ 342.4293 ] [................................................] 100%
+[ 342.4308 ] Writing partition adsp-fw_b with adsp-fw_sigheader.bin.encrypt [ 396880 bytes ]
+[ 342.4766 ] [................................................] 100%
+[ 342.5030 ] Writing partition rce-fw_b with camera-rtcpu-t194-rce_sigheader.img.encrypt [ 529776 bytes ]
+[ 345.0166 ] [................................................] 100%
+[ 345.0520 ] Writing partition sce-fw_b with sce_t194_sigheader.bin.encrypt [ 376576 bytes ]
+[ 348.4011 ] [................................................] 100%
+[ 348.4280 ] Writing partition bpmp-fw_b with bpmp-2_t194_sigheader.bin.encrypt [ 1007392 bytes ]
+[ 350.8127 ] [................................................] 100%
+[ 350.8780 ] Writing partition bpmp-fw-dtb_b with tegra194-a02-bpmp-p2888-0008-b01-jaxi_lz4_sigheader.dtb.encrypt [ 28160 bytes ]
+[ 357.2350 ] [................................................] 100%
+[ 357.2375 ] Writing partition VER_b with jetson-agx-xavier-industrial_bootblob_ver.txt [ 109 bytes ]
+[ 357.4218 ] [................................................] 100%
+[ 357.4231 ] Writing partition VER with jetson-agx-xavier-industrial_bootblob_ver.txt [ 109 bytes ]
+[ 357.4327 ] [................................................] 100%
+[ 357.4344 ] Writing partition master_boot_record with mbr_1_3.bin [ 512 bytes ]
+[ 357.4442 ] [................................................] 100%
+[ 357.4456 ] Writing partition APP with jetson-min.ext4.img [ 395793084 bytes ]
+[ 357.4537 ] [                                                ] 000%[ 357.4537 ] [                                                ] 000%[ 357.4537 ] [                                                ] 000%[ 357.4537 ] [                                                ] 001%[ 357.4537 ] [                                                ] 001%[ 357.4537 ] [                                                ] 001%[ 357.4537 ] [                                                ] 001%[ 357.4537 ] [.                                               ] 002%[ 357.4537 ] [.                                               ] 002%[ 357.4537 ] [.                                               ] 002%[ 357.4537 ] [.                                               ] 002%[ 357.4537 ] [.                                               ] 003%[ 357.4537 ] [.                                               ] 003%[ 357.4537 ] [.                                               ] 003%[ 357.4537 ] [.                                               ] 003%[ 357.4537 ] [..                                              ] 004%[ 357.4537 ] [..                                              ] 004%[ 357.4537 ] [..                                              ] 004%[ 357.4537 ] [..                                              ] 005%[ 357.4537 ] [..                                              ] 005%[ 357.4537 ] [..                                              ] 005%[ 357.4537 ] [..                                              ] 005%[ 357.4537 ] [...                                             ] 006%[ 357.4537 ] [...                                             ] 006%[ 357.4537 ] [...                                             ] 006%[ 357.4537 ] [...                                             ] 006%[ 357.4537 ] [...                                             ] 007%[ 357.4537 ] [...                                             ] 007%[ 357.4537 ] [...                                             ] 007%[ 357.4537 ] [...                                             ] 007%[ 357.4537 ] [....                                            ] 008%[ 357.4537 ] [....                                            ] 008%[ 357.4537 ] [....                                            ] 008%[ 357.4537 ] [....                                            ] 009%[ 357.4537 ] [....                                            ] 009%[ 357.4537 ] [....                                            ] 009%[ 357.4537 ] [....                                            ] 009%[ 357.4537 ] [.....                                           ] 010%[ 357.4537 ] [.....                                           ] 010%[ 357.4537 ] [.....                                           ] 010%[ 357.4537 ] [.....                                           ] 010%[ 357.4537 ] [.....                                           ] 011%[ 357.4537 ] [.....                                           ] 011%[ 357.4537 ] [.....                                           ] 011%[ 357.4537 ] [.....                                           ] 011%[ 357.4537 ] [......                                          ] 012%[ 357.4537 ] [......                                          ] 012%[ 357.4537 ] [......                                          ] 012%[ 357.4537 ] [......                                          ] 012%[ 357.4537 ] [......                                          ] 013%[ 357.4537 ] [......                                          ] 013%[ 357.4537 ] [......                                          ] 013%[ 357.4537 ] [.......                                         ] 014%[ 357.4537 ] [.......                                         ] 014%[ 357.4537 ] [.......                                         ] 014%[ 357.4537 ] [.......                                         ] 014%[ 357.4537 ] [.......                                         ] 015%[ 357.4537 ] [.......                                         ] 015%[ 357.4537 ] [.......                                         ] 015%[ 357.4537 ] [.......                                         ] 015%[ 357.4537 ] [........                                        ] 016%[ 357.4537 ] [........                                        ] 016%[ 357.4537 ] [........                                        ] 016%[ 357.4537 ] [........                                        ] 016%[ 357.4537 ] [........                                        ] 017%[ 357.4537 ] [........                                        ] 017%[ 357.4537 ] [........                                        ] 017%[ 357.4537 ] [.........                                       ] 018%[ 357.4537 ] [.........                                       ] 018%[ 357.4537 ] [.........                                       ] 018%[ 357.4537 ] [.........                                       ] 018%[ 357.4537 ] [.........                                       ] 019%[ 357.4537 ] [.........                                       ] 019%[ 357.4537 ] [.........                                       ] 019%[ 357.4537 ] [.........                                       ] 019%[ 357.4537 ] [..........                                      ] 020%[ 357.4537 ] [..........                                      ] 020%[ 357.4537 ] [..........                                      ] 020%[ 357.4537 ] [..........                                      ] 020%[ 357.4537 ] [..........                                      ] 021%[ 357.4537 ] [..........                                      ] 021%[ 357.4537 ] [..........                                      ] 021%[ 357.4537 ] [..........                                      ] 021%[ 357.4537 ] [...........                                     ] 022%[ 357.4537 ] [...........                                     ] 022%[ 357.4537 ] [...........                                     ] 022%[ 357.4537 ] [...........                                     ] 023%[ 357.4537 ] [...........                                     ] 023%[ 357.4537 ] [...........                                     ] 023%[ 357.4537 ] [...........                                     ] 023%[ 357.4537 ] [............                                    ] 024%[ 357.4537 ] [............                                    ] 024%[ 357.4537 ] [............                                    ] 024%[ 357.4537 ] [............                                    ] 024%[ 357.4537 ] [............                                    ] 025%[ 357.4537 ] [............                                    ] 025%[ 357.4537 ] [............                                    ] 025%[ 357.4537 ] [............                                    ] 025%[ 357.4537 ] [.............                                   ] 026%[ 357.4537 ] [.............                                   ] 026%[ 357.4537 ] [.............                                   ] 026%[ 357.4537 ] [.............                                   ] 027%[ 357.4537 ] [.............                                   ] 027%[ 357.4537 ] [.............                                   ] 027%[ 357.4537 ] [.............                                   ] 027%[ 357.4537 ] [..............                                  ] 028%[ 357.4537 ] [..............                                  ] 028%[ 357.4537 ] [..............                                  ] 028%[ 357.4537 ] [..............                                  ] 028%[ 357.4537 ] [..............                                  ] 029%[ 357.4537 ] [..............                                  ] 029%[ 357.4537 ] [..............                                  ] 029%[ 357.4537 ] [..............                                  ] 029%[ 357.4537 ] [...............                                 ] 030%[ 357.4537 ] [...............                                 ] 030%[ 357.4537 ] [...............                                 ] 030%[ 357.4537 ] [...............                                 ] 030%[ 357.4537 ] [...............                                 ] 031%[ 357.4537 ] [...............                                 ] 031%[ 357.4537 ] [...............                                 ] 031%[ 357.4537 ] [................                                ] 032%[ 357.4537 ] [................                                ] 032%[ 357.4537 ] [................                                ] 032%[ 357.4537 ] [................                                ] 032%[ 357.4537 ] [................                                ] 033%[ 357.4537 ] [................                                ] 033%[ 357.4537 ] [................                                ] 033%[ 357.4537 ] [................                                ] 033%[ 357.4537 ] [.................                               ] 034%[ 357.4537 ] [.................                               ] 034%[ 357.4537 ] [.................                               ] 034%[ 357.4537 ] [.................                               ] 034%[ 357.4537 ] [.................                               ] 035%[ 357.4537 ] [.................                               ] 035%[ 357.4537 ] [.................                               ] 035%[ 357.4537 ] [..................                              ] 036%[ 357.4537 ] [..................                              ] 036%[ 357.4537 ] [..................                              ] 036%[ 357.4537 ] [..................                              ] 036%[ 357.4537 ] [..................                              ] 037%[ 357.4537 ] [..................                              ] 037%[ 357.4537 ] [..................                              ] 037%[ 357.4537 ] [..................                              ] 037%[ 357.4537 ] [...................                             ] 038%[ 357.4537 ] [...................                             ] 038%[ 357.4537 ] [...................                             ] 038%[ 357.4537 ] [...................                             ] 038%[ 357.4537 ] [...................                             ] 039%[ 357.4537 ] [...................                             ] 039%[ 357.4537 ] [...................                             ] 039%[ 357.4537 ] [....................                            ] 040%[ 357.4537 ] [....................                            ] 040%[ 357.4537 ] [....................                            ] 040%[ 357.4537 ] [....................                            ] 040%[ 357.4537 ] [....................                            ] 041%[ 357.4537 ] [....................                            ] 041%[ 357.4537 ] [....................                            ] 041%[ 357.4537 ] [....................                            ] 041%[ 357.4537 ] [.....................                           ] 042%[ 357.4537 ] [.....................                           ] 042%[ 357.4537 ] [.....................                           ] 042%[ 357.4537 ] [.....................                           ] 042%[ 357.4537 ] [.....................                           ] 043%[ 357.4537 ] [.....................                           ] 043%[ 357.4537 ] [.....................                           ] 043%[ 357.4537 ] [.....................                           ] 043%[ 357.4537 ] [......................                          ] 044%[ 357.4537 ] [......................                          ] 044%[ 357.4537 ] [......................                          ] 044%[ 357.4537 ] [......................                          ] 045%[ 357.4537 ] [......................                          ] 045%[ 357.4537 ] [......................                          ] 045%[ 357.4537 ] [......................                          ] 045%[ 357.4537 ] [.......................                         ] 046%[ 357.4537 ] [.......................                         ] 046%[ 357.4537 ] [.......................                         ] 046%[ 357.4537 ] [.......................                         ] 046%[ 357.4537 ] [.......................                         ] 047%[ 357.4537 ] [.......................                         ] 047%[ 357.4537 ] [.......................                         ] 047%[ 357.4537 ] [.......................                         ] 047%[ 357.4537 ] [........................                        ] 048%[ 357.4537 ] [........................                        ] 048%[ 357.4537 ] [........................                        ] 048%[ 357.4537 ] [........................                        ] 049%[ 357.4537 ] [........................                        ] 049%[ 357.4537 ] [........................                        ] 049%[ 357.4537 ] [........................                        ] 049%[ 357.4537 ] [.........................                       ] 050%[ 357.4537 ] [.........................                       ] 050%[ 357.4537 ] [.........................                       ] 050%[ 357.4537 ] [.........................                       ] 050%[ 357.4537 ] [.........................                       ] 051%[ 357.4537 ] [.........................                       ] 051%[ 357.4537 ] [.........................                       ] 051%[ 357.4537 ] [.........................                       ] 051%[ 357.4537 ] [..........................                      ] 052%[ 357.4537 ] [..........................                      ] 052%[ 357.4537 ] [..........................                      ] 052%[ 357.4537 ] [..........................                      ] 052%[ 357.4537 ] [..........................                      ] 053%[ 357.4537 ] [..........................                      ] 053%[ 357.4537 ] [..........................                      ] 053%[ 357.4537 ] [...........................                     ] 054%[ 357.4537 ] [...........................                     ] 054%[ 357.4537 ] [...........................                     ] 054%[ 357.4537 ] [...........................                     ] 054%[ 357.4537 ] [...........................                     ] 055%[ 357.4537 ] [...........................                     ] 055%[ 357.4537 ] [...........................                     ] 055%[ 357.4537 ] [...........................                     ] 055%[ 357.4537 ] [............................                    ] 056%[ 357.4537 ] [............................                    ] 056%[ 357.4537 ] [............................                    ] 056%[ 357.4537 ] [............................                    ] 056%[ 357.4537 ] [............................                    ] 057%[ 357.4537 ] [............................                    ] 057%[ 357.4537 ] [............................                    ] 057%[ 357.4537 ] [.............................                   ] 058%[ 357.4537 ] [.............................                   ] 058%[ 357.4537 ] [.............................                   ] 058%[ 357.4537 ] [.............................                   ] 058%[ 357.4537 ] [.............................                   ] 059%[ 357.4537 ] [.............................                   ] 059%[ 357.4537 ] [.............................                   ] 059%[ 357.4537 ] [.............................                   ] 059%[ 357.4537 ] [..............................                  ] 060%[ 357.4537 ] [..............................                  ] 060%[ 357.4537 ] [..............................                  ] 060%[ 357.4537 ] [..............................                  ] 060%[ 357.4537 ] [..............................                  ] 061%[ 357.4537 ] [..............................                  ] 061%[ 357.4537 ] [..............................                  ] 061%[ 357.4537 ] [..............................                  ] 061%[ 357.4537 ] [...............................                 ] 062%[ 357.4537 ] [...............................                 ] 062%[ 357.4537 ] [...............................                 ] 062%[ 357.4537 ] [...............................                 ] 063%[ 357.4537 ] [...............................                 ] 063%[ 357.4537 ] [...............................                 ] 063%[ 357.4537 ] [...............................                 ] 063%[ 357.4537 ] [................................                ] 064%[ 357.4537 ] [................................                ] 064%[ 357.4537 ] [................................                ] 064%[ 357.4537 ] [................................                ] 064%[ 357.4537 ] [................................                ] 065%[ 357.4537 ] [................................                ] 065%[ 357.4537 ] [................................                ] 065%[ 357.4537 ] [................................                ] 065%[ 357.4537 ] [.................................               ] 066%[ 357.4537 ] [.................................               ] 066%[ 357.4537 ] [.................................               ] 066%[ 357.4537 ] [.................................               ] 067%[ 357.4537 ] [.................................               ] 067%[ 357.4537 ] [.................................               ] 067%[ 357.4537 ] [.................................               ] 067%[ 357.4537 ] [..................................              ] 068%[ 357.4537 ] [..................................              ] 068%[ 357.4537 ] [..................................              ] 068%[ 357.4537 ] [..................................              ] 068%[ 357.4537 ] [..................................              ] 069%[ 357.4537 ] [..................................              ] 069%[ 357.4537 ] [..................................              ] 069%[ 357.4537 ] [..................................              ] 069%[ 357.4537 ] [...................................             ] 070%[ 357.4537 ] [...................................             ] 070%[ 357.4537 ] [...................................             ] 070%[ 357.4537 ] [...................................             ] 071%[ 357.4537 ] [...................................             ] 071%[ 357.4537 ] [...................................             ] 071%[ 357.4537 ] [...................................             ] 071%[ 357.4537 ] [....................................            ] 072%[ 357.4537 ] [....................................            ] 072%[ 357.4537 ] [....................................            ] 072%[ 357.4537 ] [....................................            ] 072%[ 357.4537 ] [....................................            ] 073%[ 357.4537 ] [....................................            ] 073%[ 357.4537 ] [....................................            ] 073%[ 357.4537 ] [....................................            ] 073%[ 357.4537 ] [.....................................           ] 074%[ 357.4537 ] [.....................................           ] 074%[ 357.4537 ] [.....................................           ] 074%[ 357.4537 ] [.....................................           ] 074%[ 357.4537 ] [.....................................           ] 075%[ 357.4537 ] [.....................................           ] 075%[ 357.4537 ] [.....................................           ] 075%[ 357.4537 ] [......................................          ] 076%[ 357.4537 ] [......................................          ] 076%[ 357.4537 ] [......................................          ] 076%[ 357.4537 ] [......................................          ] 076%[ 357.4537 ] [......................................          ] 077%[ 357.4537 ] [......................................          ] 077%[ 357.4537 ] [......................................          ] 077%[ 357.4537 ] [......................................          ] 077%[ 357.4537 ] [.......................................         ] 078%[ 357.4537 ] [.......................................         ] 078%[ 357.4537 ] [.......................................         ] 078%[ 357.4537 ] [.......................................         ] 078%[ 357.4537 ] [.......................................         ] 079%[ 357.4537 ] [.......................................         ] 079%[ 357.4537 ] [.......................................         ] 079%[ 357.4537 ] [........................................        ] 080%[ 357.4537 ] [........................................        ] 080%[ 357.4537 ] [........................................        ] 080%[ 357.4537 ] [........................................        ] 080%[ 357.4537 ] [........................................        ] 081%[ 357.4537 ] [........................................        ] 081%[ 357.4537 ] [........................................        ] 081%[ 357.4537 ] [........................................        ] 081%[ 357.4537 ] [.........................................       ] 082%[ 357.4537 ] [.........................................       ] 082%[ 357.4537 ] [.........................................       ] 082%[ 357.4537 ] [.........................................       ] 082%[ 357.4537 ] [.........................................       ] 083%[ 357.4537 ] [.........................................       ] 083%[ 357.4537 ] [.........................................       ] 083%[ 357.4537 ] [.........................................       ] 083%[ 357.4537 ] [..........................................      ] 084%[ 357.4537 ] [..........................................      ] 084%[ 357.4537 ] [..........................................      ] 084%[ 357.4537 ] [..........................................      ] 085%[ 357.4537 ] [..........................................      ] 085%[ 357.4537 ] [..........................................      ] 085%[ 357.4537 ] [..........................................      ] 085%[ 357.4537 ] [...........................................     ] 086%[ 357.4537 ] [...........................................     ] 086%[ 357.4537 ] [...........................................     ] 086%[ 357.4537 ] [...........................................     ] 086%[ 357.4537 ] [...........................................     ] 087%[ 357.4537 ] [...........................................     ] 087%[ 357.4537 ] [...........................................     ] 087%[ 357.4537 ] [...........................................     ] 087%[ 357.4537 ] [............................................    ] 088%[ 357.4537 ] [............................................    ] 088%[ 357.4537 ] [............................................    ] 088%[ 357.4537 ] [............................................    ] 089%[ 357.4537 ] [............................................    ] 089%[ 357.4537 ] [............................................    ] 089%[ 357.4537 ] [............................................    ] 089%[ 357.4537 ] [.............................................   ] 090%[ 357.4537 ] [.............................................   ] 090%[ 357.4537 ] [.............................................   ] 090%[ 357.4537 ] [.............................................   ] 090%[ 357.4537 ] [.............................................   ] 091%[ 357.4537 ] [.............................................   ] 091%[ 357.4537 ] [.............................................   ] 091%[ 357.4537 ] [.............................................   ] 091%[ 357.4537 ] [..............................................  ] 092%[ 357.4537 ] [..............................................  ] 092%[ 357.4537 ] [..............................................  ] 092%[ 357.4537 ] [..............................................  ] 092%[ 357.4537 ] [..............................................  ] 093%[ 357.4537 ] [..............................................  ] 093%[ 357.4537 ] [..............................................  ] 093%[ 357.4537 ] [............................................... ] 094%[ 357.4537 ] [............................................... ] 094%[ 357.4537 ] [............................................... ] 094%[ 357.4537 ] [............................................... ] 094%[ 357.4537 ] [............................................... ] 095%[ 357.4537 ] [............................................... ] 095%[ 357.4537 ] [............................................... ] 095%[ 357.4537 ] [............................................... ] 095%[ 357.4537 ] [................................................] 096%[ 357.4537 ] [................................................] 096%[ 357.4537 ] [................................................] 096%[ 357.4537 ] [................................................] 096%[ 357.4537 ] [................................................] 097%[ 357.4537 ] [................................................] 097%[ 357.4537 ] [................................................] 097%[ 357.4537 ] [................................................] 098%[ 357.4537 ] [................................................] 098%[ 357.4537 ] [................................................] 098%[ 357.4537 ] [................................................] 098%[ 357.4537 ] [................................................] 099%[ 357.4537 ] [................................................] 099%[ 357.4537 ] [................................................] 099%[ 357.4537 ] [................................................] 099%[ 357.4537 ] [................................................] 100%
+[ 388.5372 ] Writing partition kernel with boot.img [ 35262464 bytes ]
+[ 388.6880 ] [.                                               ] 002%[ 388.6880 ] [..                                              ] 005%[ 388.6880 ] [....                                            ] 008%[ 388.6880 ] [.....                                           ] 011%[ 388.6880 ] [.......                                         ] 014%[ 388.6880 ] [........                                        ] 017%[ 388.6880 ] [..........                                      ] 020%[ 388.6880 ] [...........                                     ] 023%[ 388.6880 ] [.............                                   ] 026%[ 388.6880 ] [..............                                  ] 029%[ 388.6880 ] [................                                ] 032%[ 388.6880 ] [.................                               ] 035%[ 388.6880 ] [...................                             ] 038%[ 388.6880 ] [....................                            ] 041%[ 388.6880 ] [......................                          ] 044%[ 388.6880 ] [.......................                         ] 047%[ 388.6880 ] [.........................                       ] 050%[ 388.6880 ] [..........................                      ] 053%[ 388.6880 ] [............................                    ] 056%[ 388.6880 ] [.............................                   ] 059%[ 388.6880 ] [...............................                 ] 062%[ 388.6880 ] [................................                ] 065%[ 388.6880 ] [..................................              ] 068%[ 388.6880 ] [...................................             ] 071%[ 388.6880 ] [.....................................           ] 074%[ 388.6880 ] [......................................          ] 077%[ 388.6880 ] [........................................        ] 080%[ 388.6880 ] [.........................................       ] 083%[ 388.6880 ] [...........................................     ] 086%[ 388.6880 ] [............................................    ] 089%[ 388.6880 ] [..............................................  ] 092%[ 388.6880 ] [............................................... ] 095%[ 388.6880 ] [................................................] 098%[ 388.6880 ] [................................................] 100%
+[ 391.4732 ] Writing partition kernel-dtb with kernel_tegra194-p2888-0008-p2822-0000.dtb [ 455159 bytes ]
+[ 391.4877 ] [................................................] 100%
+[ 391.5461 ] Writing partition kernel_b with boot.img [ 35262464 bytes ]
+[ 391.5719 ] [.                                               ] 002%[ 391.5719 ] [..                                              ] 005%[ 391.5719 ] [....                                            ] 008%[ 391.5719 ] [.....                                           ] 011%[ 391.5719 ] [.......                                         ] 014%[ 391.5719 ] [........                                        ] 017%[ 391.5719 ] [..........                                      ] 020%[ 391.5719 ] [...........                                     ] 023%[ 391.5719 ] [.............                                   ] 026%[ 391.5719 ] [..............                                  ] 029%[ 391.5719 ] [................                                ] 032%[ 391.5719 ] [.................                               ] 035%[ 391.5719 ] [...................                             ] 038%[ 391.5719 ] [....................                            ] 041%[ 391.5719 ] [......................                          ] 044%[ 391.5719 ] [.......................                         ] 047%[ 391.5719 ] [.........................                       ] 050%[ 391.5719 ] [..........................                      ] 053%[ 391.5719 ] [............................                    ] 056%[ 391.5719 ] [.............................                   ] 059%[ 391.5719 ] [...............................                 ] 062%[ 391.5719 ] [................................                ] 065%[ 391.5719 ] [..................................              ] 068%[ 391.5719 ] [...................................             ] 071%[ 391.5719 ] [.....................................           ] 074%[ 391.5719 ] [......................................          ] 077%[ 391.5719 ] [........................................        ] 080%[ 391.5719 ] [.........................................       ] 083%[ 391.5719 ] [...........................................     ] 086%[ 391.5719 ] [............................................    ] 089%[ 391.5719 ] [..............................................  ] 092%[ 391.5719 ] [............................................... ] 095%[ 391.5719 ] [................................................] 098%[ 391.5719 ] [................................................] 100%
+[ 394.4510 ] Writing partition kernel-dtb_b with kernel_tegra194-p2888-0008-p2822-0000.dtb [ 455159 bytes ]
+[ 394.4649 ] [................................................] 100%
+[ 394.4930 ] Writing partition esp with esp.img [ 67108864 bytes ]
+[ 394.5177 ] [                                                ] 001%[ 394.5177 ] [.                                               ] 003%[ 394.5177 ] [..                                              ] 004%[ 394.5177 ] [...                                             ] 006%[ 394.5177 ] [...                                             ] 007%[ 394.5177 ] [....                                            ] 009%[ 394.5177 ] [.....                                           ] 010%[ 394.5177 ] [......                                          ] 012%[ 394.5177 ] [.......                                         ] 014%[ 394.5177 ] [.......                                         ] 015%[ 394.5177 ] [........                                        ] 017%[ 394.5177 ] [.........                                       ] 018%[ 394.5177 ] [..........                                      ] 020%[ 394.5177 ] [..........                                      ] 021%[ 394.5177 ] [...........                                     ] 023%[ 394.5177 ] [............                                    ] 025%[ 394.5177 ] [.............                                   ] 026%[ 394.5177 ] [..............                                  ] 028%[ 394.5177 ] [..............                                  ] 029%[ 394.5177 ] [...............                                 ] 031%[ 394.5177 ] [................                                ] 032%[ 394.5177 ] [.................                               ] 034%[ 394.5177 ] [.................                               ] 035%[ 394.5177 ] [..................                              ] 037%[ 394.5177 ] [...................                             ] 039%[ 394.5177 ] [....................                            ] 040%[ 394.5177 ] [.....................                           ] 042%[ 394.5177 ] [.....................                           ] 043%[ 394.5177 ] [......................                          ] 045%[ 394.5177 ] [.......................                         ] 046%[ 394.5177 ] [........................                        ] 048%[ 394.5177 ] [.........................                       ] 050%[ 394.5177 ] [.........................                       ] 051%[ 394.5177 ] [..........................                      ] 053%[ 394.5177 ] [...........................                     ] 054%[ 394.5177 ] [............................                    ] 056%[ 394.5177 ] [............................                    ] 057%[ 394.5177 ] [.............................                   ] 059%[ 394.5177 ] [..............................                  ] 060%[ 394.5177 ] [...............................                 ] 062%[ 394.5177 ] [................................                ] 064%[ 394.5177 ] [................................                ] 065%[ 394.5177 ] [.................................               ] 067%[ 394.5177 ] [..................................              ] 068%[ 394.5177 ] [...................................             ] 070%[ 394.5177 ] [...................................             ] 071%[ 394.5177 ] [....................................            ] 073%[ 394.5177 ] [.....................................           ] 075%[ 394.5177 ] [......................................          ] 076%[ 394.5177 ] [.......................................         ] 078%[ 394.5177 ] [.......................................         ] 079%[ 394.5177 ] [........................................        ] 081%[ 394.5177 ] [.........................................       ] 082%[ 394.5177 ] [..........................................      ] 084%[ 394.5177 ] [..........................................      ] 085%[ 394.5177 ] [...........................................     ] 087%[ 394.5177 ] [............................................    ] 089%[ 394.5177 ] [.............................................   ] 090%[ 394.5177 ] [..............................................  ] 092%[ 394.5177 ] [..............................................  ] 093%[ 394.5177 ] [............................................... ] 095%[ 394.5177 ] [................................................] 096%[ 394.5177 ] [................................................] 098%[ 394.5177 ] [................................................] 100%
+[ 400.0905 ] tegradevflash_v2 --write secondary_gpt_backup gpt_secondary_3_0.bin
+[ 400.0912 ] Bootloader version 01.00.0000
+[ 400.1221 ] Writing partition secondary_gpt_backup with gpt_secondary_3_0.bin [ 16896 bytes ]
+[ 400.1224 ] [................................................] 100%
+[ 400.2419 ] tegradevflash_v2 --write BCT br_bct_BR.bct
+[ 400.2442 ] Bootloader version 01.00.0000
+[ 400.2760 ] Writing partition BCT with br_bct_BR.bct [ 2888 bytes ]
+[ 400.2766 ] [................................................] 100%
+[ 400.7651 ] tegradevflash_v2 --write BCT-boot-chain_backup bct_backup.img
+[ 400.7659 ] Bootloader version 01.00.0000
+[ 400.7948 ] Writing partition BCT-boot-chain_backup with bct_backup.img [ 32768 bytes ]
+[ 400.7951 ] [................................................] 100%
+[ 401.0154 ] tegradevflash_v2 --write MB1_BCT mb1_cold_boot_bct_MB1_sigheader.bct.encrypt
+[ 401.0162 ] Bootloader version 01.00.0000
+[ 401.0482 ] Writing partition MB1_BCT with mb1_cold_boot_bct_MB1_sigheader.bct.encrypt [ 31008 bytes ]
+[ 401.0485 ] [................................................] 100%
+[ 401.8823 ] tegradevflash_v2 --write MB1_BCT_b mb1_cold_boot_bct_MB1_sigheader.bct.encrypt
+[ 401.8847 ] Bootloader version 01.00.0000
+[ 401.9158 ] Writing partition MB1_BCT_b with mb1_cold_boot_bct_MB1_sigheader.bct.encrypt [ 31008 bytes ]
+[ 401.9162 ] [................................................] 100%
+[ 402.1301 ] tegradevflash_v2 --write MEM_BCT mem_coldboot_sigheader.bct.encrypt
+[ 402.1308 ] Bootloader version 01.00.0000
+[ 402.1600 ] Writing partition MEM_BCT with mem_coldboot_sigheader.bct.encrypt [ 198656 bytes ]
+[ 402.1602 ] [................................................] 100%
+[ 403.4315 ] tegradevflash_v2 --write MEM_BCT_b mem_coldboot_sigheader.bct.encrypt
+[ 403.4323 ] Bootloader version 01.00.0000
+[ 403.4636 ] Writing partition MEM_BCT_b with mem_coldboot_sigheader.bct.encrypt [ 198656 bytes ]
+[ 403.4641 ] [................................................] 100%
+[ 404.7328 ] Flashing completed
+
+[ 404.7329 ] Coldbooting the device
+[ 404.7369 ] tegrarcm_v2 --ismb2
+[ 404.8212 ] tegradevflash_v2 --reboot coldboot
+[ 404.8220 ] Bootloader version 01.00.0000
++ '[' -n '' -o 0 -eq 1 ']'
